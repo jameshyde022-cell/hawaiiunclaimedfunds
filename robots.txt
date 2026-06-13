@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Block nothing — all pages are indexable
+# Disallow: /
+
+Sitemap: https://hawaiiunclaimedfunds.com/sitemap.xml
+
+# Crawl delay (optional — remove if causing indexing issues)
+# Crawl-delay: 1
