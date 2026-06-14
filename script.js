@@ -3,6 +3,9 @@
    Main JavaScript — script.js
    ===================================================== */
 
+// ⚠️ PASTE YOUR REAL FORMSPREE ENDPOINT HERE before going live
+var FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
+
 document.addEventListener('DOMContentLoaded', function () {
   initStickyNav();
   initMobileMenu();
@@ -134,7 +137,7 @@ function validateField(field) {
   } else if (field.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
     isValid = false;
     msg = 'Please enter a valid email address.';
-  } else if (field.type === 'tel' && !/^[\d\s\-\(\)\+]{7,}$/.test(value)) {
+  } else if (field.type === 'tel' && value && !/^[\d\s\-\(\)\+]{7,}$/.test(value)) {
     isValid = false;
     msg = 'Please enter a valid phone number.';
   }
@@ -155,19 +158,76 @@ function submitForm(form) {
   var successEl = form.querySelector('.form-success');
   var fieldsEl = form.querySelector('.form-fields');
 
-  if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Sending…'; }
-
-  // Simulate network request — replace with real fetch() call when backend is ready
-  setTimeout(function () {
-    if (fieldsEl) {
-      fieldsEl.style.display = 'none';
+  // Ensure a submit-error element exists
+  var submitErrorEl = form.querySelector('.form-submit-error');
+  if (!submitErrorEl) {
+    submitErrorEl = document.createElement('div');
+    submitErrorEl.className = 'form-submit-error';
+    submitErrorEl.setAttribute('role', 'alert');
+    submitErrorEl.setAttribute('aria-live', 'polite');
+    submitErrorEl.style.cssText = 'color:#c0392b; background:#fdf2f2; border:1px solid #f5c6cb; border-radius:6px; padding:0.75rem 1rem; margin-top:0.75rem; font-size:0.9rem; display:none;';
+    var submitRow = form.querySelector('.form-submit-row');
+    if (submitRow) {
+      submitRow.parentNode.insertBefore(submitErrorEl, submitRow.nextSibling);
     } else {
-      form.querySelectorAll('.form-group, .form-row, .form-submit-row, .form-privacy').forEach(function (el) {
-        el.style.display = 'none';
+      form.appendChild(submitErrorEl);
+    }
+  }
+
+  function showSubmitError(msg) {
+    submitErrorEl.textContent = msg;
+    submitErrorEl.style.display = 'block';
+    if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Send Message'; }
+  }
+
+  // Guard: endpoint not yet configured
+  if (FORMSPREE_ENDPOINT.indexOf('YOUR_FORM_ID') !== -1) {
+    console.error('Formspree endpoint is not configured. Set FORMSPREE_ENDPOINT in script.js before going live.');
+    showSubmitError('Contact form is not yet configured. Please reach out directly.');
+    return;
+  }
+
+  if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Sending…'; }
+  submitErrorEl.style.display = 'none';
+
+  // Collect form data as JSON
+  var data = {};
+  var elements = form.querySelectorAll('input, select, textarea');
+  elements.forEach(function (el) {
+    if (el.name) {
+      if (el.type === 'radio') {
+        if (el.checked) data[el.name] = el.value;
+      } else {
+        data[el.name] = el.value;
+      }
+    }
+  });
+
+  fetch(FORMSPREE_ENDPOINT, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify(data)
+  })
+  .then(function (response) {
+    if (response.ok) {
+      // Success
+      if (fieldsEl) {
+        fieldsEl.style.display = 'none';
+      } else {
+        form.querySelectorAll('.form-group, .form-row, .form-submit-row, .form-privacy').forEach(function (el) {
+          el.style.display = 'none';
+        });
+      }
+      if (successEl) successEl.classList.add('show');
+    } else {
+      return response.json().then(function (json) {
+        throw new Error((json && json.error) ? json.error : 'Submission failed. Please try again.');
       });
     }
-    if (successEl) successEl.classList.add('show');
-  }, 800);
+  })
+  .catch(function (err) {
+    showSubmitError(err.message || 'There was an error sending your message. Please try again or reach out directly.');
+  });
 }
 
 /* ---- Scroll Animations ---- */
