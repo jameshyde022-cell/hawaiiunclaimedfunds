@@ -4,7 +4,7 @@
    ===================================================== */
 
 // ⚠️ PASTE YOUR REAL FORMSPREE ENDPOINT HERE before going live
-var FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
+var FORMSPREE_ENDPOINT = 'https://formspree.io/f/xnjylrgj';
 
 document.addEventListener('DOMContentLoaded', function () {
   initStickyNav();
