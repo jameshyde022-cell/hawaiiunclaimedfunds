@@ -5,3 +5,5 @@ private_leads/
 *_private.csv
 *_real.csv
 *_working.xlsx
+__pycache__/
+*.pyc

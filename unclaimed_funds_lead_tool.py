@@ -10,6 +10,7 @@ queues that require human verification.
 from __future__ import annotations
 
 import argparse
+import html
 import io
 import re
 from dataclasses import dataclass
@@ -156,6 +157,13 @@ class GroupStats:
     total_cash: float
     record_count: int
     confidence: str
+
+
+@dataclass
+class ReportSection:
+    title: str
+    filename: str
+    dataframe: pd.DataFrame
 
 
 class UnionFind:
@@ -514,6 +522,40 @@ def dashboard(df: pd.DataFrame, grouped_df: pd.DataFrame) -> pd.DataFrame:
     return pd.DataFrame(rows)
 
 
+def report_sections(df: pd.DataFrame) -> list[ReportSection]:
+    grouped_df = grouped_owner_summary(df)
+    single_1000 = df[df["Cash Amount"] >= 1000].sort_values("Cash Amount", ascending=False)
+    grouped_1000 = grouped_df[
+        (grouped_df["Grouped Total Cash"] >= 1000)
+        & (grouped_df["Record Count"] > 1)
+        & (grouped_df["Max Single Cash"] < 1000)
+    ]
+    high_priority = grouped_df[grouped_df["Priority"] == "High"]
+    business = df[
+        df["Lead Type Tags"].str.contains("business", na=False)
+        & ~df["Lead Type Tags"].str.contains("co-owner", na=False)
+    ]
+    complex_claims = df[df["Lead Type Tags"].str.contains("co-owner|escrow/trust|court-related", regex=True, na=False)]
+    research_queue = df[df["Research Needed"].astype(str).str.len() > 0].copy()
+    priority_rank = {"High": 0, "Medium": 1, "Low - grouped": 2, "Low": 3}
+    research_queue["_Priority Rank"] = research_queue["Priority"].map(priority_rank).fillna(9)
+    research_queue = (
+        research_queue.sort_values(["_Priority Rank", "Grouped Total Cash"], ascending=[True, False])
+        .drop(columns=["_Priority Rank"])
+    )
+
+    return [
+        ReportSection("Summary Dashboard", "summary_dashboard.csv", dashboard(df, grouped_df)),
+        ReportSection("High Priority Leads", "high_priority_leads.csv", high_priority),
+        ReportSection("Business Leads", "business_leads.csv", business),
+        ReportSection("$1,000+ Single Claims", "single_claims_1000_plus.csv", single_1000),
+        ReportSection("$1,000+ Grouped Owners", "grouped_owners_1000_plus.csv", grouped_1000),
+        ReportSection("Co-owner Complex Claims", "co_owner_complex_claims.csv", complex_claims),
+        ReportSection("Research Queue", "research_queue.csv", research_queue),
+        ReportSection("All Cleaned Records", "all_cleaned_records.csv", df),
+    ]
+
+
 def autosize_workbook(path: Path) -> None:
     from openpyxl import load_workbook
     from openpyxl.styles import Font, PatternFill
@@ -540,44 +582,164 @@ def autosize_workbook(path: Path) -> None:
 
 
 def write_workbook(df: pd.DataFrame, output_path: Path) -> None:
-    grouped_df = grouped_owner_summary(df)
-    single_1000 = df[df["Cash Amount"] >= 1000].sort_values("Cash Amount", ascending=False)
-    grouped_1000 = grouped_df[
-        (grouped_df["Grouped Total Cash"] >= 1000)
-        & (grouped_df["Record Count"] > 1)
-        & (grouped_df["Max Single Cash"] < 1000)
+    sections_by_title = {section.title: section for section in report_sections(df)}
+    workbook_order = [
+        "All Cleaned Records",
+        "$1,000+ Single Claims",
+        "$1,000+ Grouped Owners",
+        "High Priority Leads",
+        "Business Leads",
+        "Co-owner Complex Claims",
+        "Research Queue",
+        "Summary Dashboard",
     ]
-    high_priority = grouped_df[grouped_df["Priority"] == "High"]
-    business = df[
-        df["Lead Type Tags"].str.contains("business", na=False)
-        & ~df["Lead Type Tags"].str.contains("co-owner", na=False)
-    ]
-    complex_claims = df[df["Lead Type Tags"].str.contains("co-owner|escrow/trust|court-related", regex=True, na=False)]
-    research_queue = df[df["Research Needed"].astype(str).str.len() > 0].copy()
-    priority_rank = {"High": 0, "Medium": 1, "Low - grouped": 2, "Low": 3}
-    research_queue["_Priority Rank"] = research_queue["Priority"].map(priority_rank).fillna(9)
-    research_queue = (
-        research_queue.sort_values(["_Priority Rank", "Grouped Total Cash"], ascending=[True, False])
-        .drop(columns=["_Priority Rank"])
-    )
-
     with pd.ExcelWriter(output_path, engine="openpyxl") as writer:
-        df.to_excel(writer, sheet_name="All Cleaned Records", index=False)
-        single_1000.to_excel(writer, sheet_name="$1,000+ Single Claims", index=False)
-        grouped_1000.to_excel(writer, sheet_name="$1,000+ Grouped Owners", index=False)
-        high_priority.to_excel(writer, sheet_name="High Priority Leads", index=False)
-        business.to_excel(writer, sheet_name="Business Leads", index=False)
-        complex_claims.to_excel(writer, sheet_name="Co-owner Complex Claims", index=False)
-        research_queue.to_excel(writer, sheet_name="Research Queue", index=False)
-        dashboard(df, grouped_df).to_excel(writer, sheet_name="Summary Dashboard", index=False)
+        for title in workbook_order:
+            section = sections_by_title[title]
+            section.dataframe.to_excel(writer, sheet_name=section.title, index=False)
 
     autosize_workbook(output_path)
 
 
+def format_cell(value: object, column: str) -> str:
+    if pd.isna(value):
+        return ""
+    if column in {"Cash Amount", "Grouped Total Cash", "Max Single Cash", "Estimated Recovery Fee 20%", "Value"}:
+        try:
+            amount = float(value)
+        except (TypeError, ValueError):
+            return html.escape(str(value))
+        if column == "Value":
+            return f"{amount:,.2f}" if not amount.is_integer() else f"{amount:,.0f}"
+        return f"${amount:,.2f}"
+    return html.escape(str(value))
+
+
+def html_columns(df: pd.DataFrame, title: str) -> list[str]:
+    if title == "Summary Dashboard":
+        return [column for column in ["Metric", "Value"] if column in df.columns]
+    preferred = [
+        "Priority",
+        "Reported Owner",
+        "Primary Owner",
+        "Co-owner",
+        "Address / Location",
+        "Cash Amount",
+        "Grouped Total Cash",
+        "Estimated Recovery Fee 20%",
+        "Record Count",
+        "Record Count In Group",
+        "Max Single Cash",
+        "Reporting Company",
+        "Lead Type Tags",
+        "Research Needed",
+        "Needs Human Verification",
+        "Group Confidence",
+        "Property ID",
+        "Property IDs",
+    ]
+    selected = [column for column in preferred if column in df.columns]
+    return selected or list(df.columns)
+
+
+def render_html_table(df: pd.DataFrame, title: str) -> str:
+    columns = html_columns(df, title)
+    header = "".join(f"<th>{html.escape(column)}</th>" for column in columns)
+    if df.empty:
+        body = f'<tr><td colspan="{len(columns)}">No records in this section.</td></tr>'
+    else:
+        rows = []
+        for _, row in df.iterrows():
+            cells = "".join(f"<td>{format_cell(row[column], column)}</td>" for column in columns)
+            rows.append(f"<tr>{cells}</tr>")
+        body = "\n".join(rows)
+    return f"<table><thead><tr>{header}</tr></thead><tbody>{body}</tbody></table>"
+
+
+def write_csv_outputs(sections: list[ReportSection], output_dir: Path) -> None:
+    output_dir.mkdir(parents=True, exist_ok=True)
+    for section in sections:
+        section.dataframe.to_csv(output_dir / section.filename, index=False)
+
+
+def write_html_report(sections: list[ReportSection], output_dir: Path) -> Path:
+    output_dir.mkdir(parents=True, exist_ok=True)
+    summary = sections[0].dataframe if sections else pd.DataFrame()
+    summary_rows = ""
+    for _, row in summary.iterrows():
+        metric = html.escape(str(row.get("Metric", "")))
+        value = format_cell(row.get("Value", ""), "Value")
+        summary_rows += f'<div class="total"><span>{metric}</span><strong>{value}</strong></div>\n'
+
+    nav = "\n".join(
+        f'<a href="#{html.escape(section.filename[:-4])}">{html.escape(section.title)}</a>'
+        for section in sections
+    )
+    sections_html = "\n".join(
+        f'''
+        <section id="{html.escape(section.filename[:-4])}">
+            <h2>{html.escape(section.title)}</h2>
+            <p class="meta">{len(section.dataframe)} records. CSV: {html.escape(section.filename)}</p>
+            {render_html_table(section.dataframe, section.title)}
+        </section>
+        '''
+        for section in sections
+    )
+    report = f'''<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Unclaimed Funds Lead Report</title>
+    <style>
+        body {{ font-family: Arial, sans-serif; margin: 24px; color: #1f2933; background: #f7f8fa; }}
+        h1 {{ margin-bottom: 6px; }}
+        h2 {{ margin-top: 34px; border-bottom: 2px solid #d8dee8; padding-bottom: 6px; }}
+        .subtitle, .meta {{ color: #52606d; }}
+        .totals {{ display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 10px; margin: 18px 0; }}
+        .total {{ background: #ffffff; border: 1px solid #d8dee8; padding: 12px; }}
+        .total span {{ display: block; color: #52606d; font-size: 13px; }}
+        .total strong {{ display: block; margin-top: 5px; font-size: 18px; }}
+        nav {{ display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 24px; }}
+        nav a {{ background: #ffffff; border: 1px solid #cbd5e1; color: #102a43; padding: 7px 10px; text-decoration: none; }}
+        table {{ border-collapse: collapse; width: 100%; background: #ffffff; margin-bottom: 24px; }}
+        th, td {{ border: 1px solid #d8dee8; padding: 7px 8px; text-align: left; vertical-align: top; font-size: 13px; }}
+        th {{ background: #102a43; color: #ffffff; position: sticky; top: 0; }}
+        tr:nth-child(even) td {{ background: #f3f6f9; }}
+        section {{ overflow-x: auto; }}
+    </style>
+</head>
+<body>
+    <h1>Unclaimed Funds Lead Report</h1>
+    <p class="subtitle">Generated from cleaned records. Every lead still requires human verification.</p>
+    <div class="totals">
+        {summary_rows}
+    </div>
+    <nav>
+        {nav}
+    </nav>
+    {sections_html}
+</body>
+</html>
+'''
+    report_path = output_dir / "lead_report.html"
+    report_path.write_text(report, encoding="utf-8")
+    return report_path
+
+
+def write_browser_outputs(df: pd.DataFrame, output_dir: Path) -> tuple[Path, list[ReportSection]]:
+    sections = report_sections(df)
+    write_csv_outputs(sections, output_dir)
+    report_path = write_html_report(sections, output_dir)
+    return report_path, sections
+
+
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Create a Hawaii unclaimed-funds lead workbook from CSV, Excel, or pasted text.")
+    parser = argparse.ArgumentParser(description="Create Hawaii unclaimed-funds lead reports from CSV, Excel, or pasted text.")
     parser.add_argument("input", type=Path, help="Input .csv, .xlsx, .xls, .xlsm, .txt, or .tsv file.")
-    parser.add_argument("-o", "--output", type=Path, default=Path("hawaii_unclaimed_funds_leads.xlsx"), help="Output workbook path.")
+    parser.add_argument("--output-dir", type=Path, default=Path("unclaimed_funds_output"), help="Folder for HTML and CSV outputs.")
+    parser.add_argument("-o", "--output", type=Path, default=None, help="Optional Excel workbook output path.")
+    parser.add_argument("--xlsx", action="store_true", help="Also create an Excel workbook. If -o is omitted, uses the output folder.")
     parser.add_argument("--pasted-text", action="store_true", help="Treat the input file as pasted delimited text.")
     parser.add_argument("--fuzzy-threshold", type=int, default=90, help="Owner-name fuzzy match threshold from 0 to 100.")
     args = parser.parse_args()
@@ -587,8 +749,18 @@ def main() -> int:
 
     raw_df = read_input(args.input, text_mode=args.pasted_text)
     lead_df = build_lead_dataframe(raw_df, fuzzy_threshold=args.fuzzy_threshold)
-    write_workbook(lead_df, args.output)
-    print(f"Wrote {len(lead_df)} cleaned records to {args.output}")
+    report_path, sections = write_browser_outputs(lead_df, args.output_dir)
+    print(f"Wrote {len(lead_df)} cleaned records to {args.output_dir}")
+    print(f"HTML report: {report_path}")
+    print("CSV files:")
+    for section in sections:
+        print(f"  {args.output_dir / section.filename}")
+
+    if args.xlsx or args.output:
+        xlsx_path = args.output or (args.output_dir / "unclaimed_funds_leads.xlsx")
+        write_workbook(lead_df, xlsx_path)
+        print(f"Excel workbook: {xlsx_path}")
+
     print("All generated leads are marked Needs Human Verification = Yes.")
     return 0
 

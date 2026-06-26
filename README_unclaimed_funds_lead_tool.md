@@ -1,12 +1,12 @@
 # Hawaii Unclaimed Funds Lead Workbook Tool
 
-This local Python tool turns scraped or pasted Hawaii unclaimed-property records into an Excel workbook of leads.
+This local Python tool turns scraped or pasted Hawaii unclaimed-property records into browser-viewable HTML, per-section CSV files, and optional Excel workbooks.
 
 It does not scrape websites, bypass CAPTCHA, submit searches, or claim that any person is the correct contact. It only cleans data, groups likely related records, creates research links, and marks every output row as `Needs Human Verification`.
 
 ## Files
 
-- `unclaimed_funds_lead_tool.py` - workbook generator.
+- `unclaimed_funds_lead_tool.py` - report generator.
 - `requirements-unclaimed-funds-tool.txt` - Python dependencies.
 - `sample_unclaimed_records.csv` - sample input for testing.
 
@@ -22,25 +22,32 @@ python -m pip install -r requirements-unclaimed-funds-tool.txt
 
 ## Run
 
-Create a workbook from CSV:
+Create a browser report and CSV files from CSV:
 
 ```powershell
-python unclaimed_funds_lead_tool.py sample_unclaimed_records.csv -o hawaii_unclaimed_funds_leads.xlsx
+python unclaimed_funds_lead_tool.py sample_unclaimed_records.csv --output-dir C:\tmp\unclaimed_funds_output
 ```
 
-Create a workbook from Excel:
+Create the same browser/CSV outputs from Excel:
 
 ```powershell
-python unclaimed_funds_lead_tool.py scraped_records.xlsx -o leads.xlsx
+python unclaimed_funds_lead_tool.py scraped_records.xlsx --output-dir leads_output
 ```
 
-Create a workbook from pasted text saved in a `.txt` file:
+Create browser/CSV outputs from pasted text saved in a `.txt` file:
 
 ```powershell
-python unclaimed_funds_lead_tool.py pasted_records.txt --pasted-text -o leads.xlsx
+python unclaimed_funds_lead_tool.py pasted_records.txt --pasted-text --output-dir leads_output
 ```
 
 The pasted text can be comma-delimited or tab-delimited with a header row.
+
+To also create an Excel workbook, add `--xlsx`, or pass a workbook path with `-o`:
+
+```powershell
+python unclaimed_funds_lead_tool.py sample_unclaimed_records.csv --output-dir leads_output --xlsx
+python unclaimed_funds_lead_tool.py sample_unclaimed_records.csv --output-dir leads_output -o leads.xlsx
+```
 
 ## Accepted Columns
 
@@ -57,18 +64,18 @@ The tool recognizes common variants of these columns:
 
 Missing optional columns are created as blanks.
 
-## Workbook Tabs
+## Report Sections
 
-- `All Cleaned Records`
-- `$1,000+ Single Claims`
-- `$1,000+ Grouped Owners`
+- `Summary Dashboard`
 - `High Priority Leads`
 - `Business Leads`
+- `$1,000+ Single Claims`
+- `$1,000+ Grouped Owners`
 - `Co-owner Complex Claims`
 - `Research Queue`
-- `Summary Dashboard`
+- `All Cleaned Records`
 
-Excel limits worksheet names to 31 characters, so `Co-owner / Complex Claims` is exported as `Co-owner Complex Claims`.
+The main browser file is `lead_report.html`. The tool also writes one CSV per section, including `high_priority_leads.csv`, `business_leads.csv`, and `all_cleaned_records.csv`.
 
 ## Lead Logic
 
