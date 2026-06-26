@@ -1,0 +1,7 @@
+.env
+.claude/
+real_leads/
+private_leads/
+*_private.csv
+*_real.csv
+*_working.xlsx
