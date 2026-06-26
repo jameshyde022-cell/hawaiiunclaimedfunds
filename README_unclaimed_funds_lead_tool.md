@@ -7,6 +7,7 @@ It does not scrape websites, bypass CAPTCHA, submit searches, or claim that any 
 ## Files
 
 - `unclaimed_funds_lead_tool.py` - report generator.
+- `local_claim_processor_app.py` - local browser paste-and-process interface.
 - `requirements-unclaimed-funds-tool.txt` - Python dependencies.
 - `sample_unclaimed_records.csv` - sample input for testing.
 
@@ -19,6 +20,23 @@ python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install -r requirements-unclaimed-funds-tool.txt
 ```
+
+
+## Local Browser App
+
+For normal use, start the local paste-and-process page:
+
+```powershell
+python local_claim_processor_app.py
+```
+
+It opens `http://127.0.0.1:8765/` in your browser. Paste raw copied claim text from the Hawaii unclaimed-property site into the text box and click `Process`. The app writes the browser report and CSV files to:
+
+```text
+C:\tmp\my_claim_report
+```
+
+Open `C:\tmp\my_claim_report\lead_report.html` first. The tool parses raw claim blocks with multiline owner/payee names, multiline addresses, reporting companies, cash amounts such as `$1,008.00`, and shares such as `64.000` or `--`.
 
 ## Run
 
@@ -72,6 +90,7 @@ Missing optional columns are created as blanks.
 - `$1,000+ Single Claims`
 - `$1,000+ Grouped Owners`
 - `Co-owner Complex Claims`
+- `Securities/Shares`
 - `Research Queue`
 - `All Cleaned Records`
 

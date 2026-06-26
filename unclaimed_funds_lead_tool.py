@@ -110,6 +110,7 @@ BUSINESS_TERMS = {
     "GROUP",
     "SERVICES",
     "HOLDINGS",
+    "HLDGS",
     "RESTAURANT",
     "AUTO",
     "REPAIR",
@@ -136,6 +137,17 @@ INSURANCE_TERMS = {"INSURANCE", "ASSURANCE", "INDEMNITY", "MUTUAL", "CASUALTY", 
 BANK_TERMS = {"BANK", "CREDIT UNION", "SAVINGS", "CD", "CERTIFICATE OF DEPOSIT", "FINANCIAL"}
 COURT_TERMS = {"COURT", "JUDICIAL", "CLERK", "CASE", "SETTLEMENT", "GARNISH", "PROBATE"}
 
+BUSINESS_ABBREVIATIONS = {
+    "HLDGS": "HOLDINGS",
+    "MGMT": "MANAGEMENT",
+    "MGT": "MANAGEMENT",
+    "SVCS": "SERVICES",
+    "SVC": "SERVICES",
+    "ASSN": "ASSOCIATION",
+    "ASSOCS": "ASSOCIATES",
+    "INTL": "INTERNATIONAL",
+}
+
 NAME_NOISE = {
     "MR",
     "MRS",
@@ -148,6 +160,27 @@ NAME_NOISE = {
     "ATTN",
     "C O",
     "CARE OF",
+}
+
+MONEY_LINE_RE = re.compile(r"^\(?\s*\$?\s*\d[\d,]*(?:\.\d{2})?\s*\)?$")
+SHARES_LINE_RE = re.compile(r"^(?:--|-|N/?A|NONE|\d[\d,]*(?:\.\d+)?)$", re.IGNORECASE)
+NOISE_LINES = {
+    "reported owner",
+    "reported owner / payee",
+    "owner",
+    "payee",
+    "co-owner",
+    "co owner",
+    "address",
+    "address / location",
+    "location",
+    "reporting company",
+    "holder",
+    "cash amount",
+    "amount",
+    "shares",
+    "source",
+    "property id",
 }
 
 
@@ -236,6 +269,7 @@ def normalize_owner_name(value: object) -> str:
     text = text.replace("&", " AND ")
     text = re.sub(r"[^A-Z0-9\s]", " ", text)
     text = re.sub(r"\b(JR|SR|II|III|IV|V)\b", " ", text)
+    text = " ".join(BUSINESS_ABBREVIATIONS.get(token, token) for token in text.split())
     for phrase in sorted(NAME_NOISE, key=len, reverse=True):
         text = re.sub(rf"\b{re.escape(phrase)}\b", " ", text)
     text = re.sub(r"\s+", " ", text).strip()
@@ -317,6 +351,9 @@ def lead_tags(row: pd.Series) -> list[str]:
         tags.append("insurance-related")
     if contains_any(combined, BANK_TERMS):
         tags.append("bank/CD")
+    shares = str(row.get("Shares", "")).strip()
+    if shares and shares not in {"--", "-", "0", "0.0", "0.00", "nan"}:
+        tags.append("securities/shares")
     if contains_any(combined, COURT_TERMS):
         tags.append("court-related")
     if "business" not in tags and "government" not in tags:
@@ -348,6 +385,8 @@ def research_steps(tags: str, owner: str, amount: float, grouped_total: float) -
         steps.append("Review trust, estate, court, or settlement document requirements")
     if {"insurance-related", "bank/CD"} & tag_set:
         steps.append("Confirm holder-specific proof requirements")
+    if "securities/shares" in tag_set:
+        steps.append("Review share/security transfer requirements")
     if amount >= 1000 or grouped_total >= 1000:
         steps.append("Prioritize outreach after human verification")
     if not owner:
@@ -392,15 +431,139 @@ def read_input(path: Path, text_mode: bool = False) -> pd.DataFrame:
     raise ValueError("Input must be .csv, .xlsx, .xls, .xlsm, .txt, or .tsv")
 
 
+def clean_raw_claim_line(line: str) -> str:
+    line = line.replace("\u00a0", " ").strip()
+    line = re.sub(r"\s+", " ", line)
+    return line.strip(" |")
+
+
+def is_noise_line(line: str) -> bool:
+    cleaned = clean_header(line).rstrip(":")
+    return cleaned in NOISE_LINES or cleaned.startswith("select ") or cleaned.startswith("search results")
+
+
+def is_money_line(line: str) -> bool:
+    return bool(MONEY_LINE_RE.match(clean_raw_claim_line(line))) and "$" in line
+
+
+def is_shares_line(line: str) -> bool:
+    cleaned = clean_raw_claim_line(line)
+    return bool(SHARES_LINE_RE.match(cleaned)) and not is_money_line(cleaned)
+
+
+def is_address_line(line: str) -> bool:
+    upper = re.sub(r"[^A-Z0-9 ]+", " ", str(line).upper())
+    upper = re.sub(r"\s+", " ", upper).strip()
+    holder_like = contains_any(upper, BUSINESS_TERMS | BANK_TERMS | INSURANCE_TERMS | COURT_TERMS | GOVERNMENT_TERMS)
+    has_digit = bool(re.search(r"\d", upper))
+    if re.search(r"\b\d{5}(?:-\d{4})?\b", upper):
+        return True
+    if re.search(r"\b(?:PO BOX|P O BOX|BOX|ST|STREET|AVE|AVENUE|RD|ROAD|DR|DRIVE|LN|LANE|BLVD|WAY|PL|PLACE|CT|COURT|HWY|HIGHWAY|APT|STE|SUITE)\b", upper):
+        return True
+    if re.match(r"^\d+\s+", upper):
+        return True
+    if re.search(r"\b(?:HI|HAWAII)\b", upper) and not holder_like:
+        return True
+    return bool(has_digit and re.search(r"\b(?:HONOLULU|KAILUA|KONA|HILO|WAILUKU|WAIPAHU|KAPOLEI|AIEA|KANEOHE|MILILANI|WAHIAWA|WAIANAE)\b", upper))
+
+
+def split_raw_claim_lines(text: str) -> list[str]:
+    lines: list[str] = []
+    for raw_line in text.splitlines():
+        raw_line = raw_line.strip()
+        if not raw_line:
+            continue
+        parts = re.split(r"\t+|\s{3,}", raw_line)
+        for part in parts:
+            cleaned = clean_raw_claim_line(part)
+            if cleaned and not is_noise_line(cleaned):
+                lines.append(cleaned)
+    return lines
+
+
+def parse_raw_claim_block(block: list[str], cash_amount: str, shares: str, source: str) -> dict[str, str]:
+    cleaned = [line for line in block if line and not is_noise_line(line)]
+    property_id = ""
+    kept: list[str] = []
+    for line in cleaned:
+        if re.search(r"\b(?:property|claim)\s*(?:id|number|no\.?)[#: ]", line, re.IGNORECASE):
+            property_id = re.sub(r".*(?:id|number|no\.?)\s*[#: ]*", "", line, flags=re.IGNORECASE).strip()
+        else:
+            kept.append(line)
+    cleaned = kept
+
+    address_indexes = [index for index, line in enumerate(cleaned) if is_address_line(line)]
+    if address_indexes:
+        address_start = address_indexes[0]
+        address_end = address_start
+        while address_end + 1 < len(cleaned) and is_address_line(cleaned[address_end + 1]):
+            address_end += 1
+        owner_lines = cleaned[:address_start]
+        address_lines = cleaned[address_start : address_end + 1]
+        trailing = cleaned[address_end + 1 :]
+        reporting_company = trailing[-1] if trailing else ""
+        if len(trailing) > 1:
+            owner_lines.extend(trailing[:-1])
+    else:
+        owner_lines = cleaned[:-1] if len(cleaned) > 1 else cleaned
+        address_lines = []
+        reporting_company = cleaned[-1] if len(cleaned) > 1 else ""
+
+    co_owner = ""
+    if len(owner_lines) > 1:
+        co_owner = "; ".join(owner_lines[1:])
+    owner = owner_lines[0] if owner_lines else ""
+
+    return {
+        "Reported Owner": owner,
+        "Co-owner": co_owner,
+        "Address / Location": "; ".join(address_lines),
+        "Reporting Company": reporting_company,
+        "Cash Amount": cash_amount,
+        "Shares": "" if shares in {"--", "-"} else shares,
+        "Property ID": property_id,
+        "Source": source,
+    }
+
+
+def read_raw_claim_text(text: str, source: str = "raw pasted Hawaii claim text") -> pd.DataFrame:
+    lines = split_raw_claim_lines(text)
+    if not lines:
+        raise ValueError("Raw pasted claim text is empty")
+
+    records: list[dict[str, str]] = []
+    block: list[str] = []
+    index = 0
+    while index < len(lines):
+        line = lines[index]
+        if is_money_line(line):
+            cash_amount = line
+            shares = ""
+            if index + 1 < len(lines) and is_shares_line(lines[index + 1]):
+                shares = lines[index + 1]
+                index += 1
+            if block:
+                records.append(parse_raw_claim_block(block, cash_amount, shares, source))
+            block = []
+        else:
+            block.append(line)
+        index += 1
+
+    if not records:
+        raise ValueError("No claim records found. Paste the raw rows including cash amount lines like $1,008.00.")
+    return pd.DataFrame(records)
+
+
 def read_pasted_text(text: str) -> pd.DataFrame:
     stripped = text.strip()
     if not stripped:
         raise ValueError("Pasted text input is empty")
     first_line = stripped.splitlines()[0]
+    if clean_header(first_line).rstrip(":") in NOISE_LINES or not ("," in first_line or "\t" in first_line):
+        return read_raw_claim_text(stripped)
     if "\t" in first_line:
         return pd.read_csv(io.StringIO(stripped), sep="\t")
     return pd.read_csv(io.StringIO(stripped), sep=None, engine="python")
-
 
 def build_lead_dataframe(raw_df: pd.DataFrame, fuzzy_threshold: int) -> pd.DataFrame:
     df = normalize_columns(raw_df.copy())
@@ -536,6 +699,7 @@ def report_sections(df: pd.DataFrame) -> list[ReportSection]:
         & ~df["Lead Type Tags"].str.contains("co-owner", na=False)
     ]
     complex_claims = df[df["Lead Type Tags"].str.contains("co-owner|escrow/trust|court-related", regex=True, na=False)]
+    securities = df[df["Lead Type Tags"].str.contains("securities/shares", na=False)]
     research_queue = df[df["Research Needed"].astype(str).str.len() > 0].copy()
     priority_rank = {"High": 0, "Medium": 1, "Low - grouped": 2, "Low": 3}
     research_queue["_Priority Rank"] = research_queue["Priority"].map(priority_rank).fillna(9)
@@ -551,6 +715,7 @@ def report_sections(df: pd.DataFrame) -> list[ReportSection]:
         ReportSection("$1,000+ Single Claims", "single_claims_1000_plus.csv", single_1000),
         ReportSection("$1,000+ Grouped Owners", "grouped_owners_1000_plus.csv", grouped_1000),
         ReportSection("Co-owner Complex Claims", "co_owner_complex_claims.csv", complex_claims),
+        ReportSection("Securities/Shares", "securities_shares.csv", securities),
         ReportSection("Research Queue", "research_queue.csv", research_queue),
         ReportSection("All Cleaned Records", "all_cleaned_records.csv", df),
     ]
@@ -590,6 +755,7 @@ def write_workbook(df: pd.DataFrame, output_path: Path) -> None:
         "High Priority Leads",
         "Business Leads",
         "Co-owner Complex Claims",
+        "Securities/Shares",
         "Research Queue",
         "Summary Dashboard",
     ]
