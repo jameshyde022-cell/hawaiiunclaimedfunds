@@ -1516,3 +1516,15 @@ html { overflow-x: clip; }
   .section-header .subtitle, .eyebrow-label { font-size: 0.85rem; }
   .comparison-table { font-size: 0.9rem; }
 }
+
+/* ---- Helpful Links page ---- */
+.link-list { max-width: 820px; margin: 0 auto; display: flex; flex-direction: column; gap: 1rem; }
+.link-card { display: flex; gap: 1.25rem; align-items: flex-start; background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 1.5rem; box-shadow: var(--shadow); transition: var(--transition); color: var(--color-text); text-decoration: none; }
+.link-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-2px); }
+.link-icon { font-size: 1.75rem; flex-shrink: 0; line-height: 1; }
+.link-body { display: flex; flex-direction: column; gap: 0.3rem; min-width: 0; }
+.link-title { font-family: var(--font-heading); font-size: 1.25rem; color: var(--color-primary); font-weight: 700; }
+.link-desc { color: var(--color-text-light); font-size: 1rem; }
+.link-src { color: var(--color-secondary); font-size: 0.9rem; font-weight: 700; overflow-wrap: anywhere; }
+.link-note { max-width: 820px; margin: 2rem auto 0; text-align: center; color: var(--color-text-light); }
+.link-note a { color: var(--color-primary-light); text-decoration: underline; }
