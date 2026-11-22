@@ -1,554 +1,318 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" data-type="service" data-radius="soft" data-buttons="solid" data-motion>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hawaii Unclaimed Funds LLC | State of Hawaii Unclaimed Property Recovery</title>
-  <meta name="description" content="Got a letter about State of Hawaii unclaimed property? I'm James Hyde, sole operator of Hawaii Unclaimed Funds LLC. I personally review State of Hawaii Unclaimed Property records. No upfront fees." />
-  <meta name="keywords" content="State of Hawaii unclaimed property, Hawaii unclaimed funds, unclaimed money Hawaii, recover unclaimed funds Hawaii" />
-  <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://hawaiiunclaimedfunds.com/" />
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="Hawaii Unclaimed Funds LLC — State of Hawaii Unclaimed Property Recovery" />
-  <meta property="og:description" content="I personally review State of Hawaii Unclaimed Property records to help identify rightful owners. No upfront fees." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://hawaiiunclaimedfunds.com/" />
-  <meta property="og:image" content="https://hawaiiunclaimedfunds.com/og-image.jpg" />
-  <meta property="og:locale" content="en_US" />
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Hawaii Unclaimed Funds LLC" />
-  <meta name="twitter:description" content="No upfront fees. I personally review State of Hawaii Unclaimed Property records." />
-
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@400;600;700&display=swap" rel="stylesheet" />
-
-  <link rel="stylesheet" href="styles.css" />
-
-  <!-- Structured Data: Local Business -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "Hawaii Unclaimed Funds LLC",
-    "description": "Private recovery assistance service, personally operated by James Hyde, helping Hawaii residents and businesses identify and recover funds from the State of Hawaii Unclaimed Property database. No upfront fees.",
-    "url": "https://hawaiiunclaimedfunds.com",
-    "founder": "James Hyde",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "1230 Wilder Ave.",
-      "addressLocality": "Honolulu",
-      "addressRegion": "HI",
-      "postalCode": "96822",
-      "addressCountry": "US"
-    },
-    "telephone": "+1-808-436-2507",
-    "areaServed": "Hawaii",
-    "priceRange": "Contingency fee — only upon recovery"
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hawaii Unclaimed Funds LLC: unclaimed property recovery in Hawaii</title>
+<meta name="description" content="James Hyde finds State of Hawaii unclaimed property records, prepares the claim and follows it until the owner is paid. No fee unless the claim pays.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://hawaiiunclaimedfunds.com/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Hawaii Unclaimed Funds LLC: unclaimed property recovery in Hawaii">
+<meta property="og:description" content="State of Hawaii unclaimed property claims, prepared and followed up by James Hyde in Honolulu. No fee unless the claim pays.">
+<meta property="og:url" content="https://hawaiiunclaimedfunds.com/">
+<meta property="og:image" content="https://hawaiiunclaimedfunds.com/share.jpg">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#ffffff">
+<meta name="site-kind" content="other">
+<meta name="page-type" content="service">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400..700&family=Hanken+Grotesk:wght@400..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/system.css">
+<link rel="stylesheet" href="assets/ui/cards.css">
+<link rel="stylesheet" href="assets/motion/motion.css">
+<link rel="stylesheet" href="assets/backgrounds/backgrounds.css">
+<link rel="stylesheet" href="assets/layout/layout.css">
+<link rel="stylesheet" href="assets/icons/icon.css">
+<style>
+:root {
+  --p-bg: #ffffff; --p-surface: #f4f4f4; --p-ink: #111111; --p-muted: #6b6b6b;
+  --p-accent: #1a4be0; --p-accent-ink: #ffffff; --p-action: #1a4be0; --p-action-ink: #ffffff;
+  --p-inv-bg: #111111; --p-inv-surface: #1e1e1e; --p-inv-ink: #ffffff; --p-inv-muted: #9a9a9a;
+  --p-inv-accent: #ffffff; --p-inv-accent-ink: #111111; --p-inv-action: #ffffff; --p-inv-action-ink: #111111;
+  --font-display: "Newsreader", Georgia, serif;
+  --font-text: "Hanken Grotesk", system-ui, sans-serif;
+  --display-weight: 400;
+  --display-tracking: -0.018em;
+  --display-tracking-xl: -0.025em;
+  --ly-scale: 1.06;
+}
+</style>
+<!-- page CSS: only the photographs' own frames -->
+<style>
+  #questions .panel { --p-h: 300px; margin-top: var(--s-5); }
+  #estates picture.frame__img > img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  @media (max-width: 639px) {
+    #islands .frame { --ratio: 50%; }
+    #questions .panel { --p-h: 520px; }
   }
-  </script>
-
-  <!-- Google Analytics placeholder -->
-  <!-- Replace GA_MEASUREMENT_ID with your actual ID -->
-  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script> -->
+  @media (min-width: 640px) and (max-width: 1023px) {
+    #islands .grid { flex: 1 1 0; min-height: 0; }
+    #islands .grid > .frame { grid-column: auto / span 6; --ratio: 0px; height: 100%; }
+    #questions .panel { display: none; }
+    #contact .closing__links .grid > div { grid-column: auto / span 6; }
+  }
+  @media (min-width: 800px) and (max-width: 1023px) { #questions .panel { display: block; --p-h: 180px; } }
+</style>
+<script>document.documentElement.classList.add('m-enter');setTimeout(()=>document.documentElement.classList.add('m-enter-done'),700)</script>
+<script src="assets/backgrounds/backgrounds.js"></script>
+<script>document.documentElement.classList.add('mo-js');setTimeout(()=>document.documentElement.classList.add('mo-safe'),2500)</script>
+<link rel="modulepreload" href="assets/moments/moments.js">
+<link rel="modulepreload" href="assets/moments/lib.js">
+<link rel="modulepreload" href="assets/moments/word-highlight/moment.js">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Hawaii Unclaimed Funds LLC",
+  "description": "Private recovery assistance service, personally operated by James Hyde, helping Hawaii residents and businesses identify and recover funds from the State of Hawaii Unclaimed Property database. No upfront fees.",
+  "url": "https://hawaiiunclaimedfunds.com",
+  "founder": "James Hyde",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "1230 Wilder Ave.",
+    "addressLocality": "Honolulu",
+    "addressRegion": "HI",
+    "postalCode": "96822",
+    "addressCountry": "US"
+  },
+  "telephone": "+1-808-436-2507",
+  "areaServed": "Hawaii",
+  "priceRange": "Contingency fee — only upon recovery"
+}
+</script>
 </head>
 <body>
+<!-- type: service
+     deal: hero split, nav nav-mega, close close-photo, footer footer-visit, rhythm space, buttons solid, mark initial, grounds none
+     palette white-link-blue (a white ground and a biro-blue accent: the paper and ink of the claim forms and letters this work runs on), type newsreader (schibsted dealt first; its h1 failed hero-lines at 45 characters)
+     moments: word-highlight in #filing (the statement that you can file yourself, and when I help) -->
 
-<!-- ===== NAVIGATION ===== -->
-<header class="site-nav" role="banner">
-  <div class="container">
-    <div class="nav-inner">
-      <a href="index.html" class="nav-logo" aria-label="Hawaii Unclaimed Funds LLC — Home">
-        <div class="nav-logo-icon" aria-hidden="true">HI</div>
-        <div class="nav-logo-text">
-          <span class="line1">Hawaii Unclaimed</span>
-          <span class="line2">Funds LLC</span>
+<header class="nav">
+  <div class="wrap nav__bar">
+    <a class="skip-link" href="#top">Skip to content</a>
+    <a class="nav__logo" href="#top"><span class="mark mark--initial" aria-hidden="true">H</span>Hawaii Unclaimed Funds</a>
+    <nav class="nav__links" aria-label="Main">
+      <div class="nav__item"><a class="nav__link" href="verify.html">Verify</a></div>
+      <div class="nav__item">
+        <a class="nav__link" href="how-it-works.html">Process <svg class="chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <div class="nav__menu">
+          <div class="wrap grid">
+            <div class="menu-col span-3">
+              <p class="t-label">Before you call</p>
+              <a href="verify.html">Verify a letter<span>Check my letter yourself</span></a>
+              <a href="faq.html">Questions<span>Fees, letters and the State</span></a>
+              <a href="contact.html">Contact<span>Phone, form and office hours</span></a>
+            </div>
+            <div class="menu-col span-3">
+              <p class="t-label">Working with me</p>
+              <a href="how-it-works.html">How a claim works<span>From record to payment</span></a>
+              <a href="why-use-us.html">Why use me<span>When help is worth the fee</span></a>
+              <a href="#estates">Estate claims<span>Heirs, executors and trustees</span></a>
+            </div>
+            <a class="menu-card span-3 start-10" href="#estates">
+              <div class="panel"><img class="frame__img" src="assets/img/photo-f24475818-500.jpg" alt="Green coastline and surf on the south shore of Maui" width="500" height="289" data-source="stand-in" data-subject="Maui"></div>
+              <span class="t-card">Estate and trust claims</span>
+              <span class="t-small muted">What the State asks heirs for</span>
+            </a>
+          </div>
         </div>
-      </a>
-
-      <ul class="nav-links" role="navigation" aria-label="Main navigation">
-        <li><a href="index.html" class="active">Home</a></li>
-        <li><a href="verify.html">Verify Funds</a></li>
-        <li><a href="how-it-works.html">How It Works</a></li>
-        <li><a href="why-use-us.html">Why Use Me</a></li>
-        <li><a href="faq.html">FAQ</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-
-      <div class="nav-cta">
-        <a href="tel:+18084362507" class="btn btn-outline btn-sm">📞 (808) 436-2507</a>
-        <a href="contact.html" class="btn btn-primary btn-sm">Free Claim Review</a>
-        <button class="hamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-menu">
-          <span></span><span></span><span></span>
-        </button>
       </div>
+      <div class="nav__item"><a class="nav__link" href="faq.html">FAQ</a></div>
+      <div class="nav__item"><a class="nav__link" href="about.html">About</a></div>
+    </nav>
+    <div class="nav__actions">
+      <a class="nav__link" href="tel:+18084362507" aria-label="Call the office">Call</a>
+      <a class="btn btn--primary" href="contact.html">Start a free claim review</a>
     </div>
+    <button class="nav__toggle" type="button" aria-expanded="false" aria-label="Menu">
+      <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 5h14M2 13h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
   </div>
 </header>
 
-<!-- ===== MOBILE MENU ===== -->
-<nav class="mobile-menu" id="mobile-menu" role="navigation" aria-label="Mobile navigation">
-  <ul>
-    <li><a href="index.html">Home</a></li>
-    <li><a href="verify.html">Verify Your Funds</a></li>
-    <li><a href="how-it-works.html">How It Works</a></li>
-    <li><a href="why-use-us.html">Why Use Me</a></li>
-    <li><a href="faq.html">FAQ</a></li>
-    <li><a href="about.html">About Me</a></li>
-    <li><a href="contact.html">Contact</a></li>
-  </ul>
-  <div class="mobile-menu-cta">
-    <a href="tel:+18084362507" class="btn btn-primary btn-full">📞 Call (808) 436-2507</a>
-    <a href="contact.html" class="btn btn-primary btn-full">Start a Free Claim Review</a>
-    <a href="https://unclaimedproperty.ehawaii.gov/lilo/property-search.html" target="_blank" rel="noopener noreferrer" class="btn btn-green btn-full">🏛️ Search State Unclaimed Property</a>
-  </div>
-  <div class="mobile-trust">
-    <div class="mobile-trust-item"><span class="check">✓</span> State Unclaimed Property Specialist</div>
-    <div class="mobile-trust-item"><span class="check">✓</span> Zero Upfront Fees — Ever</div>
-    <div class="mobile-trust-item"><span class="check">✓</span> Personally Handled by James Hyde</div>
-    <div class="mobile-trust-item"><span class="check">✓</span> Private Service — Not a Government Agency</div>
-  </div>
-</nav>
-
-<main id="main-content">
-
-<!-- ===== LETTER CALLOUT ===== -->
-<section class="section-sm" style="background:linear-gradient(135deg,var(--color-primary),#0E2F4D); padding-top:2rem; padding-bottom:2rem;" aria-labelledby="letter-heading">
-  <div class="container">
-    <div style="display:flex; flex-wrap:wrap; gap:1.5rem; align-items:center; justify-content:space-between;">
-      <div style="flex:2; min-width:280px;">
-        <p style="color:var(--color-accent); font-weight:700; text-transform:uppercase; letter-spacing:1px; font-size:0.78rem; margin-bottom:0.5rem;">📬 Received a Letter From Me?</p>
-        <h2 id="letter-heading" style="color:white; font-size:1.5rem; margin-bottom:0.5rem;">Received a Letter About State of Hawaii Unclaimed Property?</h2>
-        <p style="color:rgba(255,255,255,0.85); margin:0;">Verify it yourself right now, for free, using the State's own database — before you ever call me. No account required.</p>
+<main id="top">
+  <section class="hero hero--split" data-enter aria-labelledby="hero-h">
+    <div class="wrap"><div class="hero-text grid hero__grid">
+      <div class="hero__text span-5">
+        <h1 id="hero-h">Unclaimed property recovery in Hawaii</h1>
+        <p class="hero__lead">I find your name in the State of Hawaii’s unclaimed property records, prepare the claim and follow it until you are paid. No fee unless the claim pays.</p>
+        <div class="btn-row">
+          <a class="btn btn--primary" href="contact.html">Start a free claim review<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a>
+          <a class="btn btn--secondary" href="https://unclaimedproperty.ehawaii.gov/lilo/property-search.html" target="_blank" rel="noopener noreferrer">Search the State database</a>
+        </div>
       </div>
-      <div style="display:flex; gap:0.75rem; flex-wrap:wrap; flex:1; min-width:260px;">
-        <a href="https://unclaimedproperty.ehawaii.gov/lilo/property-search.html" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">🏛️ Search State Unclaimed Property</a>
-        <a href="verify.html" class="btn btn-outline" style="border-color:white; color:white;">How to Verify</a>
+      <div class="hero__media span-6 start-7">
+        <picture>
+          <source media="(max-width: 639px)" srcset="assets/img/james-hyde-700.jpg">
+          <img src="assets/img/james-hyde.jpg" alt="James Hyde, who runs Hawaii Unclaimed Funds LLC, in a navy jacket and white shirt" width="1122" height="1402" style="--ly-pos: 50% 22%" fetchpriority="high" data-source="client" data-subject="James Hyde">
+        </picture>
+        <div class="ly-float">
+          <div class="ly-float__row"><span class="ly-live">Private service</span><span>Honolulu</span></div>
+          <div class="ly-float__title">Not affiliated with the State of Hawaii</div>
+        </div>
       </div>
-    </div>
-  </div>
-</section>
+    </div></div>
+  </section>
 
-<!-- ===== HERO ===== -->
-<section class="hero" aria-labelledby="hero-heading">
-  <div class="hero-bg-pattern" aria-hidden="true"></div>
-  <div class="container">
-    <div class="hero-content">
-      <div class="hero-eyebrow" aria-label="Personally operated by James Hyde">🌺 Personally Operated by James Hyde — Hawaii Unclaimed Funds LLC</div>
-      <h1 id="hero-heading">You May Have Money Waiting in <span class="accent">Hawaii's Unclaimed Property Records</span></h1>
-      <p class="hero-subheadline">I'm James Hyde, sole operator of Hawaii Unclaimed Funds LLC. I personally review the State of Hawaii Unclaimed Property database — dormant bank accounts, insurance proceeds, utility deposits, and more — to help identify rightful owners and assist with recovery.</p>
-      <div class="hero-cta">
-        <a href="https://unclaimedproperty.ehawaii.gov/lilo/property-search.html" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">🏛️ Search State Unclaimed Property</a>
-        <a href="contact.html" class="btn btn-secondary btn-lg" aria-label="Start a free claim review">Start a Free Claim Review</a>
+  <section class="section" id="verify" style="--hm: 2" aria-labelledby="verify-h">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="verify-h">Check my letter against the State’s records. <span class="muted">It costs nothing.</span></h2>
       </div>
-      <div class="hero-trust" role="list" aria-label="Trust indicators">
-        <div class="hero-trust-item" role="listitem"><span class="check">✓</span> State Property Records Reviewed</div>
-        <div class="hero-trust-item" role="listitem"><span class="check">✓</span> Personally Handled by James Hyde</div>
-        <div class="hero-trust-item" role="listitem"><span class="check">✓</span> No Upfront Fee</div>
-        <div class="hero-trust-item" role="listitem"><span class="check">✓</span> Help With Recovery Paperwork</div>
-        <div class="hero-trust-item" role="listitem"><span class="check">✓</span> Private Service — Not a Government Agency</div>
+      <div class="grid grid--top fill">
+        <div class="span-5 stack-4">
+          <ol class="rows">
+            <li><span class="rows__name">Open the State’s own search</span><p>The State of Hawaii runs it at unclaimedproperty.ehawaii.gov. No account needed.</p></li>
+            <li><span class="rows__name">Search every name</span><p>Yours, a maiden or former name, and the name of a parent or late relative.</p></li>
+            <li><span class="rows__name">Compare the record</span><p>Match the owner name and last known address with the ones in my letter.</p></li>
+          </ol>
+          <p><a class="link" href="verify.html">Read the guide</a></p>
+        </div>
+        <div class="frame frame--photo frame--fill span-6 start-7">
+          <img class="frame__img" src="assets/img/photo-d183.jpg" srcset="assets/img/photo-d183-500.jpg 500w, assets/img/photo-d183-960.jpg 960w, assets/img/photo-d183.jpg 1280w" sizes="(max-width: 639px) 1280px, (max-width: 1279px) 100vw, 50vw" width="1280" height="853" alt="An open notebook with a pencil across the pages on a wooden desk" loading="lazy" decoding="async" data-source="library-057" data-subject="desk">
+        </div>
       </div>
     </div>
-  </div>
-  <div class="hero-wave" aria-hidden="true">
-    <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-      <path d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z" fill="#FAF6F0"/>
-    </svg>
-  </div>
-</section>
+  </section>
 
-<!-- ===== TRUST BANNER ===== -->
-<div class="trust-banner" role="complementary" aria-label="Trust credentials">
-  <div class="container">
-    <div class="trust-banner-inner">
-      <div class="trust-item"><span class="icon" aria-hidden="true">🌺</span> Hawaii Based — Operated by James Hyde</div>
-      <div class="trust-item"><span class="icon" aria-hidden="true">✓</span> No Upfront Fees — Ever</div>
-      <div class="trust-item"><span class="icon" aria-hidden="true">🏛️</span> State Unclaimed Property Specialist</div>
-      <div class="trust-item"><span class="icon" aria-hidden="true">✍️</span> Help With Recovery Paperwork</div>
-      <div class="trust-item"><span class="icon" aria-hidden="true">🔐</span> Private Service — Not Affiliated With Government</div>
+  <section class="section statement" id="filing" data-moment="word-highlight" aria-label="Filing it yourself">
+    <div class="wrap">
+      <p class="t-label">Filing it yourself</p>
+      <p class="mo-wh__text">You can file with the State yourself <strong>at no cost</strong>, and for a simple claim I would tell you to. I help with the claims that stall: estates, trusts, business accounts and records under an old name.</p>
     </div>
-  </div>
-</div>
+  </section>
 
-<!-- ===== DISCLOSURE ===== -->
-<div class="container" style="padding-top:1.5rem;">
-  <div class="alert-info" role="note">
-    <strong>Disclosure:</strong> I'm James Hyde, sole operator of Hawaii Unclaimed Funds LLC, a private recovery assistance service. I am not affiliated with the State of Hawaii. You may search public records and file a claim directly through the State at no cost.
-  </div>
-</div>
-
-<!-- ===== IF I CONTACTED YOU ===== -->
-<section class="section-sm section-alt">
-  <div class="container">
-    <div class="scam-box fade-in-up" role="region" aria-label="If I contacted you">
-      <h3>If I Contacted You</h3>
-      <p>If you received a letter, call, email, postcard, or text from me at Hawaii Unclaimed Funds LLC, it's most likely because your name — or the name of a family member — appears in the State of Hawaii Unclaimed Property database. You don't need to take my word for it. You can verify the record directly using the government's own search tool below.</p>
-      <div style="display:flex; gap:1rem; flex-wrap:wrap; justify-content:center; margin-top:1rem;">
-        <a href="https://unclaimedproperty.ehawaii.gov/lilo/property-search.html" target="_blank" rel="noopener noreferrer" class="btn btn-primary">🏛️ Search State Unclaimed Property</a>
+  <section class="section" id="help" style="--hm: 2" aria-labelledby="help-h">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="help-h">What I do on a claim. <span class="muted">You pay only if the State pays you.</span></h2>
+      </div>
+      <div class="grid grid--top fill">
+        <div class="span-5 stack-4">
+          <ul class="rows">
+            <li><span class="rows__name">Record review</span><p>Every spelling, former address and business name I can find.</p><span class="rows__value">Free</span></li>
+            <li><span class="rows__name">Claim review call</span><p>What the record is and what the State will ask you for.</p><span class="rows__value">Free</span></li>
+            <li><span class="rows__name">Paperwork and filing</span><p>I prepare the forms and proof, you sign online, I submit them.</p><span class="rows__value">Contingency fee</span></li>
+            <li><span class="rows__name">Follow-up</span><p>Claims can take months. I answer the State’s questions until it pays.</p><span class="rows__value">Included</span></li>
+          </ul>
+          <p><a class="link" href="how-it-works.html">See how a claim works</a></p>
+        </div>
+        <div class="frame frame--photo frame--fill span-6 start-7">
+          <img class="frame__img" src="assets/img/photo-c877.jpg" srcset="assets/img/photo-c877-500.jpg 500w, assets/img/photo-c877-960.jpg 960w, assets/img/photo-c877.jpg 1280w" sizes="(max-width: 639px) 1280px, (max-width: 1279px) 100vw, 50vw" width="1280" height="853" alt="Stacks of old record books and folders seen from the side" loading="lazy" decoding="async" data-source="library-057" data-subject="records">
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ===== WHAT'S IN THE STATE DATABASE ===== -->
-<section class="section" id="two-sources" aria-labelledby="sources-heading">
-  <div class="container">
-    <div class="section-header fade-in-up">
-      <p class="subtitle">My Source</p>
-      <h2 id="sources-heading">Where Funds May Appear</h2>
-      <p>Most of my letters concern property listed in the State of Hawaii Unclaimed Property database — dormant bank accounts, insurance proceeds, utility deposits, and other abandoned property held by the State.</p>
-    </div>
-    <div style="max-width:480px; margin:0 auto;">
-      <div class="card fade-in-up delay-1">
-        <div class="card-icon green" aria-hidden="true">🏛️</div>
-        <h3>State Unclaimed Property</h3>
-        <p>Maintained by the State of Hawaii for abandoned or dormant property — bank accounts, insurance proceeds, utility deposits, and more. This is my primary lead source and the source of most of the letters I send.</p>
-        <a href="https://unclaimedproperty.ehawaii.gov/lilo/property-search.html" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm" style="margin-top:1rem;">🏛️ Search State Unclaimed Property</a>
+  <section class="section" id="estates" style="--hm: 2" aria-labelledby="estates-h">
+    <div class="wrap">
+      <div class="section-head section-head--row">
+        <div>
+          <h2 id="estates-h">Claims for heirs, executors and trustees</h2>
+          <p>Many of my letters go to the family of an owner who has died.</p>
+        </div>
+        <a class="link" href="contact.html">Ask about estates</a>
+      </div>
+      <div class="grid" style="margin-bottom: var(--s-7)">
+        <div class="span-4 stack-4">
+          <h3 class="t-card">Who can claim</h3>
+          <p>Usually the heirs, the estate, or the successor trustee when the property sat in a trust.</p>
+        </div>
+        <div class="span-4 stack-4">
+          <h3 class="t-card">What the State asks for</h3>
+          <p>A death certificate, proof of your relationship, and proof you may act: probate letters, an affidavit or a Certificate of Trust.</p>
+        </div>
+        <div class="span-4 stack-4">
+          <h3 class="t-card">Why estate claims take longer</h3>
+          <p>The State checks the owner has died and you are authorised. I tell you which papers your claim needs.</p>
+        </div>
+      </div>
+      <div class="frame frame--photo fill">
+        <picture class="frame__img"><source media="(max-width: 639px)" srcset="assets/img/photo-f8266129-phone.jpg"><img src="assets/img/photo-f8266129-1440.jpg" srcset="assets/img/photo-f8266129-500.jpg 500w, assets/img/photo-f8266129-960.jpg 960w, assets/img/photo-f8266129-1440.jpg 1440w" sizes="100vw" width="1440" height="1080" alt="Family homes across Mānoa, Honolulu, with the city towers in the distance" style="object-position: 50% 60%" loading="lazy" decoding="async" data-source="stand-in" data-subject="Honolulu homes"></picture>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ===== WHAT I DO ===== -->
-<section class="section section-alt" id="what-we-do" aria-labelledby="what-heading">
-  <div class="container">
-    <div class="section-header fade-in-up">
-      <p class="subtitle">How I Help</p>
-      <h2 id="what-heading">Recovery Assistance — How I Help</h2>
-      <p>I handle the research, paperwork, documentation, and follow-up so you can focus on what matters while I work on getting your money back.</p>
-    </div>
-    <div class="grid-3">
-      <div class="card fade-in-up delay-1">
-        <div class="card-icon" aria-hidden="true">🔍</div>
-        <h3>Find &amp; Verify</h3>
-        <p>I review the State of Hawaii Unclaimed Property database to identify funds that may belong to you or your family.</p>
-      </div>
-      <div class="card fade-in-up delay-2">
-        <div class="card-icon green" aria-hidden="true">📋</div>
-        <h3>Organize the Claim</h3>
-        <p>I help you understand where the record appears, what documentation the State requires, and how to organize your information to support a recovery claim.</p>
-      </div>
-      <div class="card fade-in-up delay-3">
-        <div class="card-icon gold" aria-hidden="true">💰</div>
-        <h3>Support the Process</h3>
-        <p>I assist with the recovery process from start to finish. My fee is charged only after successful recovery. You may also pursue claims directly at no cost.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== WHY PEOPLE HIRE ME ===== -->
-<section class="section" id="why-us" aria-labelledby="whyus-heading">
-  <div class="container">
-    <div style="display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center;">
-      <div class="fade-in-up">
-        <p class="subtitle" style="color:var(--color-secondary); font-size:0.85rem; font-weight:700; text-transform:uppercase; letter-spacing:2px; margin-bottom:0.75rem;">Why People Hire Me</p>
-        <h2 id="whyus-heading">The Process Can Be Confusing. I Make It Simple.</h2>
-        <p style="color:var(--color-text-light); margin-bottom:1.5rem;">Filing a claim yourself is possible — and I always point you to the free government resources. But many people find the process confusing, time-consuming, or stressful, especially when dealing with estates, trusts, business accounts, or multiple heirs.</p>
-        <div class="value-item">
-          <div class="value-icon blue" aria-hidden="true">📄</div>
-          <div class="value-content">
-            <h4>Complex Documentation</h4>
-            <p>I know exactly what documents the State requires and how to present them to avoid delays or rejections.</p>
+  <section class="section" id="questions" style="--hm: 2" aria-labelledby="questions-h">
+    <div class="wrap">
+      <div class="grid grid--top">
+        <div class="span-5 stack-4">
+          <h2 id="questions-h">Questions about letters, fees and the State</h2>
+          <p class="muted">The ones people ask on the first call.</p>
+          <p><a class="link" href="faq.html">Read all questions</a></p>
+          <div class="panel">
+            <img class="frame__img" src="assets/img/photo-f133845350-960.jpg" srcset="assets/img/photo-f133845350-500.jpg 500w, assets/img/photo-f133845350-960.jpg 960w" sizes="(max-width: 639px) 960px, (max-width: 1023px) 100vw, 40vw" width="960" height="644" alt="Houses at the back of Mānoa Valley under an evening sky" loading="lazy" decoding="async" data-source="stand-in" data-subject="Honolulu homes">
           </div>
         </div>
-        <div class="value-item">
-          <div class="value-icon" aria-hidden="true">⏱️</div>
-          <div class="value-content">
-            <h4>Time &amp; Follow-Up</h4>
-            <p>Claims can take months. I monitor and follow up on your behalf so you don't have to chase anyone.</p>
-          </div>
-        </div>
-        <div class="value-item">
-          <div class="value-icon blue" aria-hidden="true">👥</div>
-          <div class="value-content">
-            <h4>Estates, Trusts &amp; Businesses</h4>
-            <p>Heir claims, successor trustee claims, and business accounts have additional requirements. My experience prevents costly mistakes.</p>
-          </div>
-        </div>
-      </div>
-      <div class="fade-in-up delay-2">
-        <div style="background:linear-gradient(135deg,var(--color-primary),#0E2F4D); border-radius:var(--radius-lg); padding:2.5rem; color:white;">
-          <h3 style="color:white; margin-bottom:1.5rem; font-size:1.4rem;">My Simple Promise</h3>
-          <div style="display:flex; flex-direction:column; gap:1rem;">
-            <div style="display:flex; gap:0.75rem; align-items:flex-start;">
-              <span style="color:var(--color-accent); font-size:1.2rem; flex-shrink:0;">✓</span>
-              <p style="margin:0; color:rgba(255,255,255,0.85); font-size:0.95rem;"><strong style="color:white;">Zero upfront fees</strong> — you never pay me until a successful recovery.</p>
-            </div>
-            <div style="display:flex; gap:0.75rem; align-items:flex-start;">
-              <span style="color:var(--color-accent); font-size:1.2rem; flex-shrink:0;">✓</span>
-              <p style="margin:0; color:rgba(255,255,255,0.85); font-size:0.95rem;"><strong style="color:white;">I review the State database thoroughly</strong> — including alternative name spellings, former addresses, and related business entities.</p>
-            </div>
-            <div style="display:flex; gap:0.75rem; align-items:flex-start;">
-              <span style="color:var(--color-accent); font-size:1.2rem; flex-shrink:0;">✓</span>
-              <p style="margin:0; color:rgba(255,255,255,0.85); font-size:0.95rem;"><strong style="color:white;">Simple digital process</strong> — sign your agreement electronically, no office visit required to get started.</p>
-            </div>
-            <div style="display:flex; gap:0.75rem; align-items:flex-start;">
-              <span style="color:var(--color-accent); font-size:1.2rem; flex-shrink:0;">✓</span>
-              <p style="margin:0; color:rgba(255,255,255,0.85); font-size:0.95rem;"><strong style="color:white;">If I don't recover, you owe nothing</strong> — zero risk to you, period.</p>
-            </div>
-            <div style="display:flex; gap:0.75rem; align-items:flex-start;">
-              <span style="color:var(--color-accent); font-size:1.2rem; flex-shrink:0;">✓</span>
-              <p style="margin:0; color:rgba(255,255,255,0.85); font-size:0.95rem;"><strong style="color:white;">You can always verify for free</strong> — check the State database yourself at no cost.</p>
-            </div>
-          </div>
-          <a href="why-use-us.html" class="btn btn-primary" style="margin-top:2rem;">Learn Why Clients Choose Me</a>
+        <div class="faq span-6 start-7">
+          <div class="faq__item"><h3>Why did I get a letter about unclaimed property?</h3><p>Your name, or a relative’s, appears in the State of Hawaii unclaimed property records. You can check that yourself on the State’s site.</p></div>
+          <div class="faq__item"><h3>Are you part of the State of Hawaii?</h3><p>No. Hawaii Unclaimed Funds LLC is a private service I run. I am not affiliated with the State.</p></div>
+          <div class="faq__item"><h3>Can I file a claim myself?</h3><p>Yes, at no cost, through the State’s own site. I help when you would rather not handle the paperwork and follow-up.</p></div>
+          <div class="faq__item"><h3>How is your claim fee paid?</h3><p>A contingency fee, charged only after the State pays you. If the claim fails, you owe nothing. Fee agreements may be subject to applicable law.</p></div>
+          <div class="faq__item"><h3>How long does a claim take?</h3><p>Often several months, since the State reviews each claim. I follow up on yours so you do not have to.</p></div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ===== HEIRS, EXECUTORS & SUCCESSOR TRUSTEES ===== -->
-<section class="section section-alt" id="heirs" aria-labelledby="heirs-heading">
-  <div class="container">
-    <div class="section-header fade-in-up">
-      <p class="subtitle">For Families &amp; Trustees</p>
-      <h2 id="heirs-heading">Heirs, Executors &amp; Successor Trustees</h2>
-      <p>A large share of my letters go to the families of deceased owners and to successor trustees — not to the original owner. If that's you, here's what you're probably wondering.</p>
-    </div>
-    <div class="grid-3">
-      <div class="card fade-in-up delay-1">
-        <div class="card-icon" aria-hidden="true">❓</div>
-        <h3>Am I Entitled to Claim?</h3>
-        <p>If the original owner is deceased, the right to claim generally passes to their heirs, their estate, or — if the property was held in trust — the successor trustee. Whether you personally can claim depends on your relationship to the owner, whether there's a will or trust, and whether an estate has been probated. I'll walk through your specific situation with you at no cost.</p>
+  <section class="section" id="islands" aria-labelledby="islands-h">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="islands-h">Based in Honolulu, serving every Hawaii island</h2>
+        <p>Oʻahu, Maui, Hawaiʻi Island, Kauaʻi, Molokaʻi and Lānaʻi. You sign online, so nobody travels to an office.</p>
       </div>
-      <div class="card fade-in-up delay-2">
-        <div class="card-icon green" aria-hidden="true">📄</div>
-        <h3>What Documents the State Requires</h3>
-        <p>Typical requirements include a certified death certificate, proof of your relationship to the deceased, and proof of your legal authority to act — such as Letters Testamentary or Letters of Administration from probate court, a small-estate Affidavit for Collection of Personal Property, or a Statement of Succession and Chain of Title showing how the property passes to you. For trust property, the State typically requires the trust instrument or a Certificate of Trust naming you as successor trustee.</p>
-      </div>
-      <div class="card fade-in-up delay-3">
-        <div class="card-icon gold" aria-hidden="true">⚖️</div>
-        <h3>How Estate &amp; Trust Claims Differ</h3>
-        <p>Ordinary claims just need to prove you're the person named on the record. Estate and trust claims need an extra layer of proof — that the named owner is deceased, and that you're legally authorized to claim on the estate's or trust's behalf. That usually means more documentation and a longer review, especially with multiple heirs or no formal probate. I handle this documentation regularly and will tell you plainly what your specific claim needs.</p>
-      </div>
-    </div>
-    <p class="fade-in-up" style="max-width:820px; margin:2rem auto 0; text-align:center; color:var(--color-text-light);">Which of these applies depends on the size of the estate and how the property was titled — a small-estate affidavit and letters testamentary are alternatives to each other, not steps in a sequence. I'll tell you which ones your claim actually needs.</p>
-    <div class="text-center" style="margin-top:1.5rem;">
-      <a href="contact.html" class="btn btn-primary">Talk to Me About an Estate or Trust Claim</a>
-    </div>
-  </div>
-</section>
-
-<!-- ===== HOW IT WORKS ===== -->
-<section class="section" id="how-it-works" aria-labelledby="hiw-heading">
-  <div class="container">
-    <div class="section-header fade-in-up">
-      <p class="subtitle">The Process</p>
-      <h2 id="hiw-heading">How It Works — 5 Simple Steps</h2>
-      <p>My process is simple, transparent, and completely risk-free for you.</p>
-    </div>
-    <div class="steps-grid" role="list">
-      <div class="step-item fade-in-up delay-1" role="listitem">
-        <div class="step-number" aria-label="Step 1">1</div>
-        <h4>Record Review</h4>
-        <p>I review the State of Hawaii Unclaimed Property database to verify your record</p>
-      </div>
-      <div class="step-item fade-in-up delay-2" role="listitem">
-        <div class="step-number" aria-label="Step 2">2</div>
-        <h4>Free Consult</h4>
-        <p>I review your situation and explain exactly what I'll do — no pressure</p>
-      </div>
-      <div class="step-item fade-in-up delay-3" role="listitem">
-        <div class="step-number" aria-label="Step 3">3</div>
-        <h4>Sign Agreement</h4>
-        <p>100% electronic — sign my contingency agreement from your phone or computer</p>
-      </div>
-      <div class="step-item fade-in-up delay-4" role="listitem">
-        <div class="step-number" aria-label="Step 4">4</div>
-        <h4>I File</h4>
-        <p>I prepare and submit all documentation to the appropriate government office on your behalf</p>
-      </div>
-      <div class="step-item fade-in-up delay-5" role="listitem">
-        <div class="step-number" aria-label="Step 5">5</div>
-        <h4>You Get Paid</h4>
-        <p>Funds are sent to you — my contingency fee applies only after successful recovery</p>
-      </div>
-    </div>
-    <div class="text-center" style="margin-top:2.5rem;">
-      <a href="how-it-works.html" class="btn btn-outline">See the Complete Process</a>
-    </div>
-  </div>
-</section>
-
-<!-- ===== LOCAL HAWAII ===== -->
-<section class="section section-alt" id="local" aria-labelledby="local-heading">
-  <div class="container">
-    <div style="display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:center;">
-      <div class="fade-in-up">
-        <div style="background:linear-gradient(135deg,#EBF5EC,#D5EED7); border-radius:var(--radius-lg); padding:2.5rem; height:300px; display:flex; align-items:center; justify-content:center; font-size:5rem;">🌺</div>
-      </div>
-      <div class="fade-in-up delay-2">
-        <p class="subtitle" style="color:var(--color-secondary); font-size:0.85rem; font-weight:700; text-transform:uppercase; letter-spacing:2px; margin-bottom:0.75rem;">Local to Hawaii</p>
-        <h2 id="local-heading">Serving the Hawaii Community</h2>
-        <p style="color:var(--color-text-light);">I focus on helping Hawaii residents and businesses identify and recover funds from the State of Hawaii Unclaimed Property database. I serve all islands with the same aloha spirit and commitment to honest, transparent service.</p>
-        <p style="color:var(--color-text-light);">Whether you're on Oahu, Maui, the Big Island, Kauai, Molokai, or Lanai — my process works from anywhere in the islands.</p>
-        <div style="display:flex; gap:0.75rem; flex-wrap:wrap; margin-top:1.5rem;">
-          <span style="background:rgba(30,132,73,0.1); color:var(--color-secondary); padding:6px 14px; border-radius:50px; font-size:0.82rem; font-weight:700;">🌊 Oahu</span>
-          <span style="background:rgba(30,132,73,0.1); color:var(--color-secondary); padding:6px 14px; border-radius:50px; font-size:0.82rem; font-weight:700;">🌊 Maui</span>
-          <span style="background:rgba(30,132,73,0.1); color:var(--color-secondary); padding:6px 14px; border-radius:50px; font-size:0.82rem; font-weight:700;">🌊 Big Island</span>
-          <span style="background:rgba(30,132,73,0.1); color:var(--color-secondary); padding:6px 14px; border-radius:50px; font-size:0.82rem; font-weight:700;">🌊 Kauai</span>
-          <span style="background:rgba(30,132,73,0.1); color:var(--color-secondary); padding:6px 14px; border-radius:50px; font-size:0.82rem; font-weight:700;">🌊 All Islands</span>
+      <div class="grid">
+        <div class="frame frame--photo span-6" style="--ratio: 62%">
+          <img class="frame__img" src="assets/img/photo-f79843880.jpg" srcset="assets/img/photo-f79843880-500.jpg 500w, assets/img/photo-f79843880-960.jpg 960w, assets/img/photo-f79843880.jpg 1280w" sizes="(max-width: 639px) 100vw, (max-width: 1023px) 1280px, 50vw" width="1280" height="634" alt="Diamond Head crater above the houses of east Honolulu, Oʻahu" loading="lazy" decoding="async" data-source="stand-in" data-subject="Oahu">
+        </div>
+        <div class="frame frame--photo span-6" style="--ratio: 62%">
+          <img class="frame__img" src="assets/img/photo-f66372890-960.jpg" srcset="assets/img/photo-f66372890-500.jpg 500w, assets/img/photo-f66372890-960.jpg 960w" sizes="(max-width: 639px) 100vw, (max-width: 1023px) 1280px, 50vw" width="960" height="722" alt="The green ridges of the Nā Pali coast on Kauaʻi above a blue sea" loading="lazy" decoding="async" data-source="stand-in" data-subject="Kauai">
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ===== BEFORE YOU DECIDE ===== -->
-<section class="section section-alt" id="before-you-decide" aria-labelledby="byd-heading">
-  <div class="container">
-    <div class="section-header fade-in-up">
-      <p class="subtitle">An Honest Note</p>
-      <h2 id="byd-heading">Before Deciding Whether to Work With Me</h2>
-    </div>
-    <div class="scam-box fade-in-up" role="region">
-      <p>Before deciding whether to work with me, I encourage you to verify any records yourself through the public government source. You can search the State of Hawaii Unclaimed Property database at <a href="https://unclaimedproperty.ehawaii.gov/lilo/property-search.html" target="_blank" rel="noopener noreferrer">unclaimedproperty.ehawaii.gov</a>. If your situation is straightforward, you may be able to file a claim yourself for free. My fee is charged only after successful recovery. You may also pursue a claim directly through the State at no cost. Fee agreements may be subject to applicable law. This website is for informational purposes only and is not legal advice.</p>
-      <div style="display:flex; gap:1rem; flex-wrap:wrap; justify-content:center; margin-top:1rem;">
-        <a href="https://unclaimedproperty.ehawaii.gov/lilo/property-search.html" target="_blank" rel="noopener noreferrer" class="btn btn-primary">🏛️ Search State Unclaimed Property</a>
-        <a href="contact.html" class="btn btn-outline">Start a Free Claim Review</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== FAQ PREVIEW ===== -->
-<section class="section" id="faq-preview" aria-labelledby="faq-heading">
-  <div class="container">
-    <div class="section-header fade-in-up">
-      <p class="subtitle">Common Questions</p>
-      <h2 id="faq-heading">Answers to Your Most Important Questions</h2>
-    </div>
-    <div class="faq-list fade-in-up">
-      <div class="faq-item">
-        <button class="faq-question" aria-expanded="false">Why did you contact me?<span class="faq-icon" aria-hidden="true">+</span></button>
-        <div class="faq-answer" role="region"><div class="faq-answer-inner">
-          <p>I may have contacted you because your name or a family member's name appears in the State of Hawaii Unclaimed Property database. You can verify this yourself for free at <a href="https://unclaimedproperty.ehawaii.gov/lilo/property-search.html" target="_blank" rel="noopener">unclaimedproperty.ehawaii.gov</a>.</p>
-        </div></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-question" aria-expanded="false">Is this a scam? Are you affiliated with the State?<span class="faq-icon" aria-hidden="true">+</span></button>
-        <div class="faq-answer" role="region"><div class="faq-answer-inner">
-          <p>No — Hawaii Unclaimed Funds LLC is a private recovery assistance service that I personally operate. I am not affiliated with the State of Hawaii. You can verify any record yourself for free before ever contacting me. I never ask for money upfront — ever.</p>
-        </div></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-question" aria-expanded="false">Can I file a claim myself without using your service?<span class="faq-icon" aria-hidden="true">+</span></button>
-        <div class="faq-answer" role="region"><div class="faq-answer-inner">
-          <p>Yes, and I encourage you to try. Visit <a href="https://unclaimedproperty.ehawaii.gov/lilo/property-search.html" target="_blank" rel="noopener">unclaimedproperty.ehawaii.gov</a> to search the State of Hawaii Unclaimed Property database. It's free. I'm here for people who want help understanding, organizing, and pursuing the recovery process.</p>
-        </div></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-question" aria-expanded="false">How do you get paid if there are no upfront fees?<span class="faq-icon" aria-hidden="true">+</span></button>
-        <div class="faq-answer" role="region"><div class="faq-answer-inner">
-          <p>I work on a contingency basis. My fee is charged only if recovery is successful and only after the client receives funds. If I don't successfully recover your funds, you owe me nothing. Fee agreements may be subject to applicable law.</p>
-        </div></div>
-      </div>
-    </div>
-    <div class="text-center" style="margin-top:2rem;">
-      <a href="faq.html" class="btn btn-outline">See All Frequently Asked Questions</a>
-    </div>
-  </div>
-</section>
-
-<!-- ===== FINAL CTA ===== -->
-<section class="cta-section" aria-labelledby="cta-heading">
-  <div class="container">
-    <div class="fade-in-up">
-      <h2 id="cta-heading">Ready to Find Out If Hawaii Has Money Waiting for You?</h2>
-      <p>Start with a free claim review — no obligation. Verify your records yourself using the State database first if you'd like.</p>
-      <div class="cta-buttons">
-        <a href="contact.html" class="btn btn-primary btn-lg">Start a Free Claim Review</a>
-        <a href="https://unclaimedproperty.ehawaii.gov/lilo/property-search.html" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-lg">🏛️ Search State Unclaimed Property</a>
-        <a href="tel:+18084362507" class="btn btn-secondary btn-lg">📞 Call (808) 436-2507</a>
-      </div>
-      <div class="cta-trust">
-        <div class="cta-trust-item"><span class="check">✓</span> Zero Upfront Fees</div>
-        <div class="cta-trust-item"><span class="check">✓</span> No Risk</div>
-        <div class="cta-trust-item"><span class="check">✓</span> Private Service — Not a Government Agency</div>
-        <div class="cta-trust-item"><span class="check">✓</span> Electronic Signatures</div>
-      </div>
-    </div>
-  </div>
-</section>
 </main>
 
-<!-- ===== FOOTER ===== -->
-<footer class="site-footer" role="contentinfo">
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <a href="index.html" class="nav-logo" aria-label="Hawaii Unclaimed Funds LLC">
-          <div class="nav-logo-icon" style="background:linear-gradient(135deg,#D4AC0D,#B7950B);color:#1B4F72;" aria-hidden="true">HI</div>
-          <div class="nav-logo-text">
-            <span class="line1" style="color:white;">Hawaii Unclaimed</span>
-            <span class="line2" style="color:rgba(255,255,255,0.65);">Funds LLC</span>
-          </div>
-        </a>
-        <p class="tagline">Helping Hawaii residents and businesses identify and recover funds from the State of Hawaii Unclaimed Property database — with no upfront costs.</p>
-        <a href="https://unclaimedproperty.ehawaii.gov/lilo/property-search.html" target="_blank" rel="noopener noreferrer" class="footer-verify-link" aria-label="Search State Unclaimed Property">🏛️ Search State Unclaimed Property</a>
+<footer class="footer closing footer--visit" id="contact" aria-labelledby="close-h">
+  <div class="wrap">
+    <div class="closing__cta close--photo">
+      <div class="section-head--split">
+        <div><h2 id="close-h">Start with a free claim review</h2><p class="t-lead">No fee unless the claim pays. The first call and the record review are free.</p></div>
+        <a class="btn btn--primary" href="contact.html">Start a free claim review<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a>
       </div>
-      <div class="footer-col">
-        <h4>Quick Links</h4>
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="verify.html">Verify Your Funds</a></li>
-          <li><a href="how-it-works.html">How It Works</a></li>
-          <li><a href="why-use-us.html">Why Use Me</a></li>
-          <li><a href="faq.html">FAQ</a></li>
-          <li><a href="about.html">About Me</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Government Sources</h4>
-        <ul>
-          <li><a href="https://unclaimedproperty.ehawaii.gov/lilo/property-search.html" target="_blank" rel="noopener noreferrer">Search State Unclaimed Property</a></li>
-          <li><a href="privacy.html">Privacy Policy</a></li>
-          <li><a href="terms.html">Terms of Service</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Contact Me</h4>
-        <div class="footer-contact-item">📞 <a href="tel:+18084362507">(808) 436-2507</a></div>
-        <div class="footer-contact-item">📍 1230 Wilder Ave., Honolulu, HI 96822</div>
-        <div class="footer-contact-item">🕐 Mon–Fri 8am–6pm · Sat 9am–2pm</div>
-        <div class="footer-contact-item" style="margin-top:0.5rem;"><a href="contact.html">→ Contact Form</a></div>
-      </div>
+      <div class="close__media"><img src="assets/img/photo-f136387480-960.jpg" srcset="assets/img/photo-f136387480-500.jpg 500w, assets/img/photo-f136387480-960.jpg 960w" sizes="(max-width: 639px) 720px, 100vw" width="960" height="539" alt="Honolulu towers and palms along the Kakaʻako waterfront in late afternoon light" loading="lazy" decoding="async" data-source="stand-in" data-subject="Honolulu"></div>
     </div>
-  </div>
-  <div class="footer-trust-strip">
-    <div class="container">
-      <div class="footer-trust-row" role="list" aria-label="Credentials">
-        <div class="footer-trust-badge" role="listitem"><span class="chk" aria-hidden="true">✓</span> Hawaii Based</div>
-        <div class="footer-trust-badge" role="listitem"><span class="chk" aria-hidden="true">✓</span> No Upfront Fees</div>
-        <div class="footer-trust-badge" role="listitem"><span class="chk" aria-hidden="true">✓</span> State Unclaimed Property Specialist</div>
-        <div class="footer-trust-badge" role="listitem"><span class="chk" aria-hidden="true">✓</span> Electronic Signatures</div>
+    <div class="closing__links">
+      <div class="grid">
+        <div class="span-6 stack-4">
+          <address class="footer__address">1230 Wilder Ave., Honolulu</address>
+          <p><a class="link" href="https://www.openstreetmap.org/search?query=Wilder%20Avenue%20Honolulu">Get directions</a> &nbsp; <a class="link" href="tel:+18084362507">(808) 436-2507</a></p>
+        </div>
+        <div class="span-6 start-7 stack-4">
+          <h3>Office hours</h3>
+          <dl class="hours" data-tz="Pacific/Honolulu"><dt data-days="mon-fri">Mon to Fri</dt><dd>8am to 6pm</dd><dt data-days="sat">Sat</dt><dd>9am to 2pm</dd><dt data-days="sun">Sun</dt><dd>Closed</dd></dl>
+        </div>
       </div>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <div class="container">
-      <div class="footer-bottom-inner">
-        <p class="footer-legal-text">Hawaii Unclaimed Funds LLC is a private recovery assistance service personally operated by James Hyde. I am not affiliated with the State of Hawaii. You may search public records and file a claim directly through the State at no cost.</p>
-        <p class="footer-copyright">© 2026 Hawaii Unclaimed Funds LLC<br>All rights reserved.<br><span style="font-size:0.8em; opacity:0.8;">Fee agreements may be subject to applicable law. This website is for informational purposes only and is not legal advice.</span></p>
+      <div class="footer__legal">
+        <span>&copy; 2026 Hawaii Unclaimed Funds LLC &nbsp; <a href="privacy.html">Privacy</a> &nbsp; <a href="terms.html">Terms</a></span>
+        <span>A private recovery service run by James Hyde, not affiliated with the State of Hawaii. You may search and file with the State at no cost. Not legal advice.</span>
+        <a class="credits" href="credits.html">Photographs via Wikimedia Commons</a>
       </div>
     </div>
   </div>
 </footer>
 
-<!-- ===== MOBILE STICKY BAR ===== -->
-<div class="mobile-sticky-bar" role="complementary" aria-label="Quick contact">
-  <a href="tel:+18084362507" class="btn btn-primary" style="flex:1;">📞 Call Now</a>
-  <a href="contact.html" class="btn btn-outline" style="flex:1;">✉️ Contact Form</a>
-</div>
+<nav class="actionbar" aria-label="Quick actions">
+  <a class="btn btn--primary" href="contact.html">Start a free claim review</a>
+</nav>
 
-<script src="script.js"></script>
+<script type="module" src="assets/system.js"></script>
+<script type="module" src="assets/motion/motion.js"></script>
+<script type="module" src="assets/layout/layout.js"></script>
 </body>
 </html>
