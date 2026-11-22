@@ -56,6 +56,13 @@
     #contact .closing__links .grid > div { grid-column: auto / span 6; }
   }
   @media (min-width: 800px) and (max-width: 1023px) { #questions .panel { display: block; --p-h: 180px; } }
+  /* a short desktop window (a laptop): sections grow to fit what they hold instead of overlapping */
+  @media (min-width: 1024px) and (max-height: 860px) {
+    main > section:not(.hero), footer.closing { height: auto; min-height: 100svh; }
+    main > section .wrap > .grid.fill { flex: none; }
+    main > section .wrap > .frame.fill { flex: none; min-height: 360px; }
+    footer.closing .close__media { flex: none; height: 240px; }
+  }
 </style>
 <script>document.documentElement.classList.add('m-enter');setTimeout(()=>document.documentElement.classList.add('m-enter-done'),700)</script>
 <script src="assets/backgrounds/backgrounds.js"></script>
