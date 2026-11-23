@@ -41,6 +41,11 @@
 }
 </style>
 <style>
+  /* the hero holds James's letter: it grows to fit it, the text at reading size */
+  main > section.hero { height: auto; min-height: 100svh; }
+  .hero__letter { max-width: 68ch; }
+  .hero__letter > p + p { margin-top: var(--s-4); }
+  @media (max-width: 1023px) { .hero__text.span-7, .hero__media.span-5 { grid-column: 1 / -1; } }
   picture.frame__img > img { display: block; width: 100%; height: 100%; object-fit: cover; }
   @media (min-width: 640px) and (max-width: 1023px) {
     #contact .closing__links .grid > div { grid-column: auto / span 6; }
@@ -105,15 +110,22 @@
 <main id="top">
   <section class="hero hero--split" data-enter aria-labelledby="hero-h">
     <div class="wrap"><div class="hero-text grid hero__grid">
-      <div class="hero__text span-5">
-        <h1 id="hero-h">Why work with me to file your Hawaii claim?</h1>
-        <p class="hero__lead"><strong>How I help you.</strong> The State’s verification process can quickly become complicated, frustrating and slow. I take the weight off your shoulders and help get your claim right the first time.</p>
+      <div class="hero__text span-7">
+        <h1 id="hero-h">Hello, my name is James.</h1>
+        <div class="hero__letter">
+          <p>I audit Hawaii public records looking for unclaimed funds. The State lists the claims’ owners, and that’s where I start. Whether it’s a business, trust or estate, I attempt to locate the owner by referencing their name or reported address.</p>
+          <p>Many of these claims are 20–30 years old, and the addresses and phone numbers changed long ago. Sadly, but quite often, the claim owners have passed away and their families have no knowledge of these accounts.</p>
+          <p>It’s hard to know who to trust, and when I contact the family, they have every right to be skeptical. I am as transparent as possible, and I encourage everyone to verify for themselves.</p>
+          <p><a href="verify.html" style="color: inherit; text-decoration: underline; text-underline-offset: 3px">Verify</a>, and then give me a call. Ask me any questions you have, and then let me help you file a claim. This is your money. It doesn’t belong in a State trust account.</p>
+          <p>Usually, I can complete your paperwork within a week. I’ll let you know which documents the State will need from you to prove your identity and why you are entitled to claim these funds. A successful claim gets mailed to you. You pay nothing until you get paid.</p>
+          <p><strong>Let me help you. What do you have to lose?</strong></p>
+        </div>
         <div class="btn-row">
           <a class="btn btn--primary" href="contact.html">Start a free claim review<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a>
           <a class="btn btn--secondary" href="how-it-works.html">See how a claim works</a>
         </div>
       </div>
-      <div class="hero__media span-6 start-7">
+      <div class="hero__media span-5 start-8">
         <picture>
           <source media="(max-width: 639px)" srcset="assets/img/james-hyde-700.jpg">
           <img src="assets/img/james-hyde.jpg" alt="James Hyde, who runs Hawaii Unclaimed Funds LLC, in a navy jacket and white shirt" width="1122" height="1402" style="--ly-pos: 50% 22%" fetchpriority="high" data-source="client" data-subject="James Hyde">
@@ -126,6 +138,7 @@
     <div class="wrap">
       <div class="section-head">
         <h2 id="reasons-h">What I bring to your claim</h2>
+        <p><strong>How I help you.</strong> The State’s verification process can quickly become complicated, frustrating and slow. I take the weight off your shoulders and help get your claim right the first time.</p>
       </div>
       <div class="grid grid--top fill">
         <div class="span-5 stack-4">
