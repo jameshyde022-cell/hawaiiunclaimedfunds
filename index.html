@@ -44,11 +44,13 @@
 <!-- page CSS: only the photographs' own frames -->
 <style>
   #questions .panel { --p-h: 300px; margin-top: var(--s-5); }
+  #why-me h2 { margin-bottom: var(--s-8, 64px); }
   #estates picture.frame__img > img { display: block; width: 100%; height: 100%; object-fit: cover; }
   @media (max-width: 639px) {
     #islands .frame { --ratio: 50%; }
     #questions .panel { --p-h: 520px; }
   }
+  @media (min-width: 640px) and (max-width: 799px) { #research .grid.fill > .frame--fill { flex: 1 1 0; min-height: 120px; } }
   @media (min-width: 640px) and (max-width: 1023px) {
     #islands .grid { flex: 1 1 0; min-height: 0; }
     #islands .grid > .frame { grid-column: auto / span 6; --ratio: 0px; height: 100%; }
@@ -166,30 +168,9 @@
     </div></div>
   </section>
 
-  <section class="section" id="verify" style="--hm: 2" aria-labelledby="verify-h">
+  <section class="section statement" id="why-me" data-moment="word-highlight" aria-labelledby="why-me-h">
     <div class="wrap">
-      <div class="section-head">
-        <h2 id="verify-h">Check my letter against the State’s records. <span class="muted">It costs nothing.</span></h2>
-      </div>
-      <div class="grid grid--top fill">
-        <div class="span-5 stack-4">
-          <ol class="rows">
-            <li><span class="rows__name">Open the State’s own search</span><p>The State of Hawaii runs it at unclaimedproperty.ehawaii.gov. No account needed.</p></li>
-            <li><span class="rows__name">Search every name</span><p>Yours, a maiden or former name, and the name of a parent or late relative.</p></li>
-            <li><span class="rows__name">Compare the record</span><p>Match the owner name and last known address with the ones in my letter.</p></li>
-          </ol>
-          <p><a class="link" href="verify.html">Read the guide</a></p>
-        </div>
-        <div class="frame frame--photo frame--fill span-6 start-7">
-          <img class="frame__img" src="assets/img/photo-d183.jpg" srcset="assets/img/photo-d183-500.jpg 500w, assets/img/photo-d183-960.jpg 960w, assets/img/photo-d183.jpg 1280w" sizes="(max-width: 639px) 1280px, (max-width: 1279px) 100vw, 50vw" width="1280" height="853" alt="An open notebook with a pencil across the pages on a wooden desk" loading="lazy" decoding="async" data-source="library-057" data-subject="desk">
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section statement" id="why-me" data-moment="word-highlight" aria-label="Why work with me">
-    <div class="wrap">
-      <p class="t-label">Why work with me</p>
+      <h2 id="why-me-h">Why work with me to file your claim?</h2>
       <p class="mo-wh__text">Filing on your own is possible, but the State’s verification process can get complicated and slow. I build a complete claim package <strong>from day one</strong>, so your file keeps moving.</p>
     </div>
   </section>
@@ -205,7 +186,7 @@
             <li><span class="rows__name">Business and corporate records</span><p>DCCA filings and business registries, to find the owners or officers of dissolved or relocated companies.</p></li>
             <li><span class="rows__name">Address and skip-tracing searches</span><p>Old addresses, property records and public data, to find people who have moved.</p></li>
             <li><span class="rows__name">Genealogy and heir research</span><p>Family trees and estate records, to find the heirs when the owner has died.</p></li>
-            <li><span class="rows__name">Claim paperwork and follow-up</span><p>Completed claim forms and a checklist of what the State requires, ready for your signature.</p><span class="rows__value">Contingency fee</span></li>
+            <li><span class="rows__name">Claim paperwork</span><p>Completed claim forms and a checklist of what the State requires, ready for your signature.</p><span class="rows__value">Contingency fee</span></li>
           </ul>
           <p><a class="link" href="unclaimed-funds.html">Read about unclaimed funds</a></p>
         </div>
@@ -220,7 +201,7 @@
     <div class="wrap">
       <div class="section-head section-head--row">
         <div>
-          <h2 id="estates-h">Claims for heirs, executors and trustees</h2>
+          <h2 id="estates-h">Estate claims for heirs, executors and trustees</h2>
           <p>Many of my letters go to the family of an owner who has died.</p>
         </div>
         <a class="link" href="contact.html">Ask about estates</a>
