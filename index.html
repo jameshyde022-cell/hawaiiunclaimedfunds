@@ -43,6 +43,12 @@
 </style>
 <!-- page CSS: only the photographs' own frames -->
 <style>
+  #estates { height: auto; min-height: 100svh; }
+  #estates .estates__intro { max-width: 72ch; }
+  #estates .estates__intro > p + p { margin-top: var(--s-3); }
+  #estates .estates__lists { margin-top: var(--s-7); row-gap: var(--s-8); }
+  #estates .estates__photo { --ratio: 56%; margin-top: var(--s-6); }
+  @media (max-width: 1023px) { #estates .estates__lists > .span-6 { grid-column: 1 / -1; } }
   #questions .panel { --p-h: 300px; margin-top: var(--s-5); }
   #why-me h2 { margin-bottom: var(--s-8, 64px); }
   #estates picture.frame__img > img { display: block; width: 100%; height: 100%; object-fit: cover; }
@@ -187,7 +193,7 @@
             <li><span class="rows__name">Business and corporate records</span><p>DCCA filings and business registries, to find the owners or officers of dissolved or relocated companies.</p></li>
             <li><span class="rows__name">Address and skip-tracing searches</span><p>Old addresses, property records and public data, to find people who have moved.</p></li>
             <li><span class="rows__name">Genealogy and heir research</span><p>Family trees and estate records, to find the heirs when the owner has died.</p></li>
-            <li><span class="rows__name">Claim paperwork</span><p>Completed claim forms and a checklist of what the State requires, ready for your signature.</p><span class="rows__value">Contingency fee</span></li>
+            <li><span class="rows__name">Claim paperwork</span><p>Completed claim forms and a checklist of what the State requires, ready for your signature.</p></li>
           </ul>
           <p><a class="link" href="unclaimed-funds.html">Read about unclaimed funds</a></p>
         </div>
@@ -198,31 +204,36 @@
     </div>
   </section>
 
-  <section class="section" id="estates" style="--hm: 2" aria-labelledby="estates-h">
+  <section class="section" id="estates" aria-labelledby="estates-h">
     <div class="wrap">
       <div class="section-head section-head--row">
-        <div>
+        <div class="estates__intro">
           <h2 id="estates-h">Estate claims for heirs, executors and trustees</h2>
-          <p>Many of my letters go to the family of an owner who has died.</p>
+          <p>Recovering unpaid funds belonging to a deceased relative, an open estate, or a family trust requires far more than submitting a basic online form. State unclaimed property divisions, banks, and corporate transfer agents enforce strict legal documentation standards—and a single missing certificate or mismatched title can stall a claim for months.</p>
+          <p>I specialize in handling the legal research, documentation, and compliance required to recover overlooked estate funds on your behalf.</p>
         </div>
         <a class="link" href="contact.html">Ask about estates</a>
       </div>
-      <div class="grid" style="margin-bottom: var(--s-7)">
-        <div class="span-4 stack-4">
-          <h3 class="t-card">Who can claim</h3>
-          <p>Usually the heirs, the estate, or the successor trustee when the property sat in a trust.</p>
+      <div class="grid grid--top estates__lists">
+        <div class="span-6 stack-4">
+          <h3 class="t-card">Why Work With an Asset Recovery Specialist?</h3>
+          <ul class="rows">
+            <li><span class="rows__name">The Right Legal Mechanism for Every Asset</span><p>Financial institutions require specific proof of authority based on how an asset was originally titled. Whether your claim requires a Small Estate Affidavit, court-issued Letters Testamentary, or a Certification of Trust—or involves a closed probate or defunct trust—I structure the filing to meet exact statutory requirements.</p></li>
+            <li><span class="rows__name">Complete Lineage &amp; Heirship Verification</span><p>Claim auditors require an unbroken chain of title connecting you to the deceased owner. I create a checklist of the certified vital records, death certificates, wills, and historical court records needed to prove your legal right to the funds.</p></li>
+            <li><span class="rows__name">No Upfront Costs or Administrative Burden</span><p>Estate audits can take months to clear. I handle all research, record retrieval, and claim preparation upfront so you can recover rightful family or estate assets without navigating government bureaucracy or paying out-of-pocket fees before funds are recovered.</p></li>
+          </ul>
         </div>
-        <div class="span-4 stack-4">
-          <h3 class="t-card">What the State asks for</h3>
-          <p>A death certificate, proof of your relationship, and proof you may act: probate letters, an affidavit or a Certificate of Trust.</p>
+        <div class="span-6 stack-4">
+          <h3 class="t-card">Who I Assist</h3>
+          <ul class="rows">
+            <li><span class="rows__name">Heirs &amp; Beneficiaries</span><p>Locating and claiming inherited funds, uncashed checks, and dormant accounts—including small estates that do not require formal probate.</p></li>
+            <li><span class="rows__name">Executors &amp; Personal Representatives</span><p>Marshaling overlooked assets held by state agencies or financial institutions to properly settle and close an estate.</p></li>
+            <li><span class="rows__name">Trustees &amp; Successor Trustees</span><p>Documenting trust authority to recover funds titled in the name of a living or family trust (U/A/D).</p></li>
+          </ul>
+          <div class="frame frame--photo estates__photo">
+            <picture class="frame__img"><source media="(max-width: 639px)" srcset="assets/img/photo-f8266129-phone.jpg"><img src="assets/img/photo-f8266129-1440.jpg" srcset="assets/img/photo-f8266129-500.jpg 500w, assets/img/photo-f8266129-960.jpg 960w, assets/img/photo-f8266129-1440.jpg 1440w" sizes="100vw" width="1440" height="1080" alt="Family homes across Mānoa, Honolulu, with the city towers in the distance" style="object-position: 50% 60%" loading="lazy" decoding="async" data-source="stand-in" data-subject="Honolulu homes"></picture>
+          </div>
         </div>
-        <div class="span-4 stack-4">
-          <h3 class="t-card">Why estate claims take longer</h3>
-          <p>The State checks the owner has died and you are authorised. I tell you which papers your claim needs.</p>
-        </div>
-      </div>
-      <div class="frame frame--photo fill">
-        <picture class="frame__img"><source media="(max-width: 639px)" srcset="assets/img/photo-f8266129-phone.jpg"><img src="assets/img/photo-f8266129-1440.jpg" srcset="assets/img/photo-f8266129-500.jpg 500w, assets/img/photo-f8266129-960.jpg 960w, assets/img/photo-f8266129-1440.jpg 1440w" sizes="100vw" width="1440" height="1080" alt="Family homes across Mānoa, Honolulu, with the city towers in the distance" style="object-position: 50% 60%" loading="lazy" decoding="async" data-source="stand-in" data-subject="Honolulu homes"></picture>
       </div>
     </div>
   </section>
