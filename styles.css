@@ -560,7 +560,7 @@ strong { color: var(--color-primary); }
 /* ---- Steps (5-step summary) ---- */
 .steps-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   gap: 1.25rem;
   position: relative;
 }
@@ -1446,3 +1446,85 @@ hr.sep { border: none; border-top: 1px solid var(--color-border); margin: 2rem 0
   .hero-cta { flex-direction: column; align-items: center; }
   .hero-cta .btn { width: 100%; max-width: 320px; }
 }
+
+/* =====================================================
+   Homepage v2 + mobile fixes (Nov 2026)
+   ===================================================== */
+
+/* Mobile menu: hide fully when closed so it can't widen the page */
+.mobile-menu { visibility: hidden; transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), visibility 0s linear 0.35s; }
+.mobile-menu.open { visibility: visible; transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), visibility 0s; }
+html { overflow-x: clip; }
+
+/* Two-column layouts that stack on mobile */
+.split-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+.table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+.eyebrow-label { color: var(--color-secondary); font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 0.75rem; }
+
+/* Hero two-path */
+.hero-compact { padding: 70px 0 70px; }
+.path-grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; max-width: 960px; margin-top: 2.25rem; }
+.path-card { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); border-radius: var(--radius-lg); padding: 1.75rem; display: flex; flex-direction: column; gap: 0.9rem; text-align: left; }
+.path-card-featured { background: var(--color-white); border-color: var(--color-white); }
+.path-card h2 { font-size: 1.45rem; color: var(--color-white); margin: 0; }
+.path-card p { margin: 0; color: rgba(255,255,255,0.85); font-size: 1rem; }
+.path-card-featured h2 { color: var(--color-primary); }
+.path-card-featured p { color: var(--color-text-light); }
+.path-card .btn { margin-top: auto; white-space: normal; }
+.path-label { font-size: 0.85rem !important; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--color-accent) !important; }
+.path-card-featured .path-label { color: var(--color-secondary) !important; }
+.fee-box { background: #FDF8E7; border-left: 4px solid var(--color-accent); border-radius: var(--radius); padding: 0.85rem 1rem; font-size: 1rem; color: var(--color-text); line-height: 1.6; }
+.fee-box strong { display: block; color: var(--color-primary); font-size: 1.05rem; }
+.fee-box a { color: var(--color-primary-light); text-decoration: underline; }
+.path-phone { text-align: center; color: var(--color-primary); font-weight: 700; margin-top: -0.4rem; }
+.hero-disclosure { position: relative; z-index: 1; margin: 1.5rem 0 0; color: rgba(255,255,255,0.75); font-size: 0.95rem; }
+
+/* Meet James */
+.meet-grid { grid-template-columns: 0.8fr 1.2fr; align-items: start; }
+.meet-photo img { width: 100%; height: auto; border-radius: var(--radius-lg); box-shadow: var(--shadow); display: block; }
+.meet-caption { margin-top: 0.75rem; color: var(--color-text-light); font-size: 0.95rem; text-align: center; }
+.next-steps { margin: 1.25rem 0 1.25rem 1.25rem; display: flex; flex-direction: column; gap: 0.75rem; }
+.next-steps li { color: var(--color-text-light); padding-left: 0.25rem; }
+.next-steps strong { color: var(--color-primary); }
+.privacy-note { background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius); padding: 0.85rem 1rem; font-size: 0.95rem; color: var(--color-text-light); }
+.privacy-note a { color: var(--color-primary-light); text-decoration: underline; }
+
+/* Promise box */
+.promise-box { background: linear-gradient(135deg, var(--color-primary), #0E2F4D); border-radius: var(--radius-lg); padding: 2.5rem; color: var(--color-white); }
+.promise-box h3 { color: var(--color-white); margin-bottom: 1.25rem; font-size: 1.4rem; }
+.promise-box ul { list-style: none; display: flex; flex-direction: column; gap: 0.9rem; margin-bottom: 2rem; }
+.promise-box li { position: relative; padding-left: 1.75rem; color: rgba(255,255,255,0.85); }
+.promise-box li::before { content: "✓"; position: absolute; left: 0; color: var(--color-accent); font-weight: 700; }
+.promise-box strong { color: var(--color-white); }
+
+@media (max-width: 900px) {
+  .split-2, .meet-grid, .path-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .stack-mobile { grid-template-columns: 1fr !important; gap: 2rem !important; }
+  .meet-photo { max-width: 340px; margin: 0 auto; }
+}
+
+@media (max-width: 768px) {
+  .hero-compact { padding: 45px 0 50px; }
+  .hero-compact .hero-content { text-align: left; }
+  .hero-eyebrow { font-size: 0.8rem; letter-spacing: 1px; padding: 6px 14px; }
+  .btn { white-space: normal; }
+  .promise-box { padding: 1.75rem; }
+  /* Readable supporting text on phones */
+  .step-item p, .card p, .value-content p, .faq-answer-inner p, .mobile-trust-item, .trust-item, .hero-trust-item { font-size: 1rem; }
+  .step-item h4 { font-size: 1.1rem; }
+  .section-header .subtitle, .eyebrow-label { font-size: 0.85rem; }
+  .comparison-table { font-size: 0.9rem; }
+}
+
+/* ---- Helpful Links page ---- */
+.link-list { max-width: 820px; margin: 0 auto; display: flex; flex-direction: column; gap: 1rem; }
+.link-card { display: flex; gap: 1.25rem; align-items: flex-start; background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 1.5rem; box-shadow: var(--shadow); transition: var(--transition); color: var(--color-text); text-decoration: none; }
+.link-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-2px); }
+.link-icon { font-size: 1.75rem; flex-shrink: 0; line-height: 1; }
+.link-body { display: flex; flex-direction: column; gap: 0.3rem; min-width: 0; }
+.link-title { font-family: var(--font-heading); font-size: 1.25rem; color: var(--color-primary); font-weight: 700; }
+.link-desc { color: var(--color-text-light); font-size: 1rem; }
+.link-src { color: var(--color-secondary); font-size: 0.9rem; font-weight: 700; overflow-wrap: anywhere; }
+.link-note { max-width: 820px; margin: 2rem auto 0; text-align: center; color: var(--color-text-light); }
+.link-note a { color: var(--color-primary-light); text-decoration: underline; }

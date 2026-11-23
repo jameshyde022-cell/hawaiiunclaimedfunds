@@ -276,3 +276,25 @@ function initSmoothScroll() {
     });
   });
 }
+
+/* ---- Conversion tracking ----
+   Sends GA4 events for phone taps, State-search clicks, claim-review CTAs,
+   and contact-form submits. Inactive until the GA4 tag is added in <head>. */
+(function () {
+  function track(name, params) {
+    if (typeof window.gtag === 'function') window.gtag('event', name, params || {});
+  }
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a');
+    if (!a) return;
+    var href = a.getAttribute('href') || '';
+    var label = (a.textContent || '').trim().slice(0, 60);
+    var page = location.pathname;
+    if (href.indexOf('tel:') === 0) track('phone_click', { link_text: label, page: page });
+    else if (href.indexOf('unclaimedproperty.ehawaii.gov') !== -1) track('state_search_click', { link_text: label, page: page });
+    else if (/contact\.html/.test(href)) track('claim_review_click', { link_text: label, page: page });
+  });
+  document.addEventListener('submit', function (e) {
+    if (e.target.classList && e.target.classList.contains('contact-form')) track('contact_form_submit', { page: location.pathname });
+  }, true);
+})();

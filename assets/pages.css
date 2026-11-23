@@ -142,3 +142,14 @@ main > section.doc--cta { background: var(--p-inv-bg); color: var(--p-inv-ink); 
 .doc h3 + div > div:has(> div > strong) { padding: var(--s-3) 0; border-top: 1px solid var(--line); max-width: 760px; }
 main > section.doc--note { padding: var(--s-6) 0 !important; }
 @media (max-width: 639px) { .doc .btn { white-space: normal; height: auto; min-height: var(--btn-h, 48px); padding-block: 12px; text-align: center; justify-content: center; max-width: 100%; } }
+
+/* Helpful Links: a grid of link cards */
+.doc .link-list, .doc .link-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-4); margin-bottom: var(--s-7); }
+@media (max-width: 767px) { .doc .link-list, .doc .link-grid { grid-template-columns: 1fr; } }
+.doc a.link-card { display: block; text-decoration: none; color: var(--ink); border: 1px solid var(--line); border-radius: var(--r-lg, 16px); padding: var(--s-5) var(--s-6); background: var(--bg); transition: transform .25s var(--ease, ease), border-color .25s; }
+.doc a.link-card:hover { transform: translateY(-2px); border-color: var(--accent); }
+.doc .link-icon { display: none; }
+.doc .link-body { display: block; }
+.doc .link-title { display: block; font-weight: 600; font-size: 1.05rem; margin-bottom: var(--s-2); }
+.doc .link-desc { display: block; color: var(--muted); font-size: var(--t-small); line-height: 1.55; }
+.doc .link-src { display: block; margin-top: var(--s-3); font-size: var(--t-small); color: var(--accent); }
